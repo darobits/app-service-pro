@@ -9,11 +9,22 @@ export function jsonLdLocalBusiness() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `${SITE.domain}#business`,
     name: SITE.name,
     description: SITE.description,
-    areaServed: SITE.coverage,
-    telephone: SITE.phoneDisplay,
     url: SITE.domain,
+    image: [`${SITE.domain}/og.jpg`],
+    logo: `${SITE.domain}/logo-service-pro.png`,
+    areaServed: ["CABA", "AMBA"],
+    telephone: `+${SITE.whatsappE164}`,
+    priceRange: "$$",
+    openingHours: ["Mo-Sa 08:00-20:00"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: `+${SITE.whatsappE164}`,
+      availableLanguage: ["es"],
+    },
   };
 }
 
@@ -22,11 +33,12 @@ export function jsonLdService(serviceName: string) {
     "@context": "https://schema.org",
     "@type": "Service",
     name: serviceName,
+    areaServed: ["CABA", "AMBA"],
     provider: {
       "@type": "LocalBusiness",
       name: SITE.name,
+      "@id": `${SITE.domain}#business`,
     },
-    areaServed: SITE.coverage,
   };
 }
 

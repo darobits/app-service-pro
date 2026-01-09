@@ -15,18 +15,28 @@ const {
   ogImage = "/og.jpg",
   ogImageAlt = `${SITE.name} - Servicio técnico`,
   noIndex = false,
+  /** Opcional: agrega JSON-LD extra por página */
+  jsonLd = [],
 } = Astro.props;
 
 const url = canonical(pathname);
 
 // OJO: SITE.domain hoy es placeholder. Cuando tengas dominio real, se actualiza y listo.
 const ogAbs = ogImage.startsWith("http") ? ogImage : `${SITE.domain}${ogImage}`;
+
+const jsonLdArray = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+
+// Simple perf: preconnect a WA (los clicks abren wa.me)
+const waOrigin = "https://wa.me";
 ---
 <!doctype html>
 <html lang="es-AR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="application-name" content={SITE.name} />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -57,11 +67,20 @@ const ogAbs = ogImage.startsWith("http") ? ogImage : `${SITE.domain}${ogImage}`;
     <link rel="icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
+    <!-- Hints -->
+    <link rel="preconnect" href={waOrigin} />
+    <link rel="dns-prefetch" href={waOrigin} />
+
     <!-- Performance hints -->
     <link rel="preload" as="image" href="/og.jpg" />
+
+    {jsonLdArray.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
   </head>
 
   <body>
+    <a class="skipLink" href="#main">Saltar al contenido</a>
     <Header />
 
     <main id="main">

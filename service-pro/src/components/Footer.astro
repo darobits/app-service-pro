@@ -1,29 +1,38 @@
 ---
 import { SITE } from "@/config/site";
+
 const year = new Date().getFullYear();
 
-const wa =
-  `https://wa.me/${SITE.whatsappE164}?text=` +
-  encodeURIComponent("Hola! Quiero coordinar una visita.");
-
 const PinIcon = `
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`;
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path d="M12 2c3.87 0 7 3.13 7 7 0 5.25-7 13-7 13S5 14.25 5 9c0-3.87 3.13-7 7-7zm0 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+</svg>`;
+
 const ClockIcon = `
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2zm1 10.1V6h-2v7l6 3.5 1-1.7-5-2.7z"/></svg>`;
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2zm1 11h-2V6h2v7zm0 4h-2v-2h2v2z"/>
+</svg>`;
+
 const PhoneIcon = `
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.5 3 3.6 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.7 3.9.7.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h3.7c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.9.1.4 0 .8-.3 1.1l-2.2 2.2z"/></svg>`;
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path d="M6.6 10.8c1.4 2.7 3.9 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.1 22 2 13.9 2 3c0-.6.4-1 1-1h3.7c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/>
+</svg>`;
 ---
-<footer class="footer footer--pro">
+<footer class="footer">
   <div class="container">
     <div class="footer__grid">
-      <div class="footerCard footerCard--brand">
+      <div class="footerCard">
         <div class="footerBrand">
-          <img class="footerBrand__logo" src="/logo-service-pro.png" alt={`${SITE.name} logo`} />
+          <img class="footerBrand__logo" src="/logo-service-pro.png" alt={`${SITE.name} logo`} loading="lazy" decoding="async" />
           <div>
-            <h4 style="margin:0;">{SITE.name}</h4>
-            <p class="muted" style="margin:6px 0 0;">{SITE.tagline}</p>
+            <div class="footerBrand__name">{SITE.name}</div>
+            <div class="footerBrand__tagline">{SITE.tagline}</div>
           </div>
         </div>
+
+        <p class="footerCopy">
+          Servicio técnico en <strong>{SITE.coverage}</strong>. Coordinación rápida por WhatsApp, diagnóstico claro y trabajo prolijo.
+        </p>
 
         <div class="footerFacts">
           <div class="fact">
@@ -34,21 +43,10 @@ const PhoneIcon = `
             <span class="fact__icon" set:html={ClockIcon} />
             <span><strong>Horarios:</strong> {SITE.hours}</span>
           </div>
-        </div>
-      </div>
-
-      <div class="footerCard">
-        <h4>Contacto</h4>
-        <p class="muted" style="margin-bottom:10px;">Reservá por WhatsApp</p>
-
-        <a class="btn btn--wa btn--pro" href={wa}>
-          <span class="btn__badge">WhatsApp</span>
-          <span>{SITE.phoneDisplay}</span>
-        </a>
-
-        <div class="fact" style="margin-top:12px;">
-          <span class="fact__icon" set:html={PhoneIcon} />
-          <span><strong>Tel:</strong> {SITE.phoneDisplay}</span>
+          <div class="fact" style="margin-top:12px;">
+            <span class="fact__icon" set:html={PhoneIcon} />
+            <span><strong>Tel:</strong> {SITE.phoneDisplay}</span>
+          </div>
         </div>
       </div>
 
@@ -64,7 +62,10 @@ const PhoneIcon = `
     </div>
 
     <div class="footer__bottom">
-      © {year} {SITE.name} — Desarrollado por {SITE.copyrightAuthor}
+      <div class="footer__bottomInner">
+        <img class="footer__bottomLogo" src="/logo-service-pro.png" alt="" loading="lazy" decoding="async" />
+        <span>© {year} {SITE.name} — Desarrollado por {SITE.copyrightAuthor}</span>
+      </div>
     </div>
   </div>
 </footer>

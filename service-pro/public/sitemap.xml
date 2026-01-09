@@ -1,83 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
->
-  
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!--
+    IMPORTANTE
+    - Hasta definir dominio real, usamos el placeholder https://tudominio.com
+    - cuando se tenga el dominio hay que reemplazar en /public/robots.txt y en /src/config/site.ts.
+  -->
 
+  <!-- Páginas principales -->
   <url>
-    <loc>https://tudominio.com/</loc> <!-- cambiar por dominio real luego -->
-    <lastmod>2026-01-08</lastmod>
+    <loc>https://tudominio.com/</loc>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://tudominio.com/servicios</loc>
-    <lastmod>2026-01-08</lastmod>
+    <loc>https://tudominio.com/servicios/</loc>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://tudominio.com/servicios/lavarropas</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://tudominio.com/servicios/heladeras</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://tudominio.com/servicios/aire-acondicionado</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://tudominio.com/servicios/hornos-electricos</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://tudominio.com/servicios/camara-frigorifica</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://tudominio.com/servicios/otros</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
     <loc>https://tudominio.com/zonas</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://tudominio.com/preguntas-frecuentes</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://tudominio.com/contacto</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Servicios -->
+  <url>
+    <loc>https://tudominio.com/servicios/lavarropas</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tudominio.com/servicios/heladeras</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tudominio.com/servicios/aire-acondicionado</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tudominio.com/servicios/hornos-electricos</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tudominio.com/servicios/camara-frigorifica</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://tudominio.com/servicios/otros</loc>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

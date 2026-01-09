@@ -14,7 +14,11 @@ const WaIcon = `
 <header class="header header--pro">
   <div class="container header__inner">
     <a class="brand" href="/" aria-label="Ir al inicio">
-      <img src="/logo-service-pro.png" alt={`${SITE.name} logo`} />
+      <img class="brand__logo" src="/logo-service-pro.png" alt={`${SITE.name} logo`} />
+      <span class="brand__text" aria-hidden="true">
+        <span class="brand__name">{SITE.name}</span>
+        <span class="brand__tagline">{SITE.tagline}</span>
+      </span>
     </a>
 
     <nav class="nav" aria-label="Navegación principal">
@@ -26,14 +30,11 @@ const WaIcon = `
     </nav>
 
     <div class="header__cta">
-      <a class="btn btn--wa ctaDesktop btn--pro" href={wa}>
-        <span class="btn__icon" set:html={WaIcon} />
-        <span>Reservar por WhatsApp</span>
+      <a class="phoneLink" href={`tel:${SITE.phoneDisplay.replace(/\s/g, "")}`} aria-label={`Llamar a ${SITE.phoneDisplay}`}>
+        {SITE.phoneDisplay}
       </a>
 
-      <span class="phone phoneDesktop">{SITE.phoneDisplay}</span>
-
-      <a class="btn btn--wa ctaMobile btn--pro" href={wa} aria-label="Reservar por WhatsApp">
+      <a class="waIconBtn" href={wa} aria-label="Abrir WhatsApp">
         <span class="btn__icon" set:html={WaIcon} />
       </a>
 
@@ -60,12 +61,12 @@ const WaIcon = `
         <a class="sheet__link" href="/preguntas-frecuentes" data-menu-close>Preguntas frecuentes</a>
         <a class="sheet__link" href="/contacto" data-menu-close>Contacto</a>
 
-        <div style="margin-top:14px;">
+        <div class="sheet__cta">
           <a class="btn btn--wa btn--pro" href={wa}>
             <span class="btn__icon" set:html={WaIcon} />
-            <span>Reservar por WhatsApp</span>
+            <span>WhatsApp</span>
           </a>
-          <div style="margin-top:10px; font-weight:900; opacity:.9;">{SITE.phoneDisplay}</div>
+          <div class="sheet__phone">{SITE.phoneDisplay}</div>
         </div>
       </div>
     </div>

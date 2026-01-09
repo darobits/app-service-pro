@@ -1,8 +1,11 @@
 /* =========================================================
-   COMPONENTS.CSS (Pro / limpio)
-   - Evitamos duplicados
-   - Reducimos !important
-   - Unificamos botones WA
+   COMPONENTS.CSS (PRO / limpio / ordenado)
+   - Header responsive perfecto (PC / Tablet / Mobile)
+   - Botones unificados
+   - Panel + cards modernizados sin romper layout
+   - Sheet menu sólido
+   - Footer con logo grande y mejor jerarquía
+   - Reveal + Marquee + Steps + FAQ
    ========================================================= */
 
 /* -------------------------
@@ -15,46 +18,82 @@
   background: rgba(43, 44, 131, 0.76);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(11,19,32,.08);
-  transition: background .2s ease, box-shadow .2s ease;
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 .header:hover{
   background: rgba(43,44,131,.86);
   box-shadow: 0 10px 30px rgba(0,0,0,.10);
 }
+
 .header__inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  padding: 16px 0;
+  padding: 14px 0;
 }
+
+/* Brand */
 .brand{
   display:flex;
   align-items:center;
   gap:12px;
+  min-width: 0;
 }
-.brand img{
-  height: 86px;
-  width: 86px;
+
+.brand__logo{
+  height: 72px;
+  width: 72px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 10px 22px rgba(10,20,40,.10);
   border: 1px solid rgba(11,19,32,.10);
 }
 
+.brand__text{
+  display:none;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.1;
+  min-width: 0;
+}
+.brand__name{
+  color: rgba(255,255,255,.96);
+  font-weight: 980;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand__tagline{
+  color: rgba(221,223,227,.92);
+  font-weight: 850;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Nav desktop */
 .nav{
   display:none;
   gap: 18px;
   color: rgba(221, 223, 227, 0.98);
-  font-weight: 800;
+  font-weight: 850;
   font-size: 14px;
+  flex-wrap: nowrap;
 }
-@media (min-width: 920px){ .nav{ display:flex; } }
+@media (min-width: 920px){
+  .nav{ display:flex; }
+  .brand__text{ display:flex; }
+  .brand__logo{ height: 86px; width: 86px; }
+}
 
 .nav__link{
   position: relative;
   opacity: .92;
   transition: opacity .18s ease;
+  white-space: nowrap;
 }
 .nav__link:hover{ opacity: 1; }
 .nav__link::after{
@@ -69,28 +108,60 @@
 }
 .nav__link:hover::after{ width:100%; }
 
+/* CTA area */
 .header__cta{
   display:flex;
   align-items:center;
   gap:12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;              /* clave: no se desordena */
   justify-content: flex-end;
 }
-.phone{
+
+.phoneLink{
   color: rgba(221, 223, 227, 0.98);
   font-weight: 950;
-  font-size: 15px;
-  padding-left: 6px;
+  font-size: 14px;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+  transition: background .18s ease, transform .18s ease;
+}
+.phoneLink:hover{
+  background: rgba(255,255,255,.14);
+  transform: translateY(-1px);
 }
 
-/* Header responsive */
-.ctaMobile{ display:inline-flex; }
-.ctaDesktop, .phoneDesktop{ display:none; }
+/* WhatsApp icon button (header) */
+.waIconBtn{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(6,43,21,.10);
+  background: linear-gradient(90deg, var(--wa), var(--wa-dark));
+  color: #062b15;
+  box-shadow: 0 18px 38px rgba(37,211,102,.22);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.waIconBtn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 22px 44px rgba(37,211,102,.28);
+  filter: brightness(1.02);
+}
+.waIconBtn:active{ transform: translateY(1px); }
 
-@media (min-width: 920px){
-  .ctaMobile, .menuBtn{ display:none; }
-  .ctaDesktop{ display:inline-flex; }
-  .phoneDesktop{ display:inline; }
+.waIconBtn .btn__icon{ width: 20px; height: 20px; }
+.waIconBtn .btn__icon svg{ width: 20px; height: 20px; }
+
+/* Mobile tweaks */
+@media (max-width: 520px){
+  .phoneLink{ display:none; }     /* gana espacio para el logo */
+  .brand__logo{ height: 68px; width: 68px; }
 }
 
 /* Menu button */
@@ -105,16 +176,26 @@
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
+.menuBtn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(10,20,40,.14);
+}
+.menuBtn:active{ transform: translateY(1px); }
+
 .menuBtn__bar{
   width: 18px;
   height: 2px;
   background: rgba(11,19,32,.85);
   border-radius: 99px;
   display:block;
-  position: relative;
 }
 .menuBtn__bar + .menuBtn__bar{ margin-top: 5px; }
+
+@media (min-width: 920px){
+  .menuBtn{ display:none; }
+}
 
 /* -------------------------
    BUTTONS (unificados)
@@ -147,18 +228,6 @@
 }
 .btn__icon svg{ width:18px; height:18px; fill: currentColor; }
 
-.btn__badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  font-weight: 950;
-  letter-spacing: -.01em;
-}
-
-/* WA primary */
 .btn--wa{
   background: linear-gradient(90deg, var(--wa), var(--wa-dark));
   color: #062b15;
@@ -177,7 +246,6 @@
 }
 .btn--wa:hover::before{ transform: translateX(120%); }
 
-/* Ghost */
 .btn--ghost{
   background: rgba(255,255,255,.70);
   color: rgba(11,19,32,.86);
@@ -185,7 +253,24 @@
   box-shadow: 0 10px 20px rgba(10,20,40,.08);
 }
 
-/* Full width helper (para form CTA) */
+.btn--primary{
+  background: linear-gradient(90deg, rgba(43,44,131,1), rgba(32,211,230,.85));
+  color: rgba(255,255,255,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 44px rgba(43,44,131,.22);
+  position: relative;
+  overflow:hidden;
+}
+.btn--primary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.30) 18%, transparent 36%);
+  transform: translateX(-120%);
+  transition: transform .7s ease;
+}
+.btn--primary:hover::before{ transform: translateX(120%); }
+
 .btn--block{
   width: 100%;
   justify-content: center;
@@ -219,10 +304,19 @@
 .panel__title{
   text-align:center;
   color: rgba(11,19,32,.92);
-  font-size: 34px;
-  margin: 6px 0 18px;
+  font-size: clamp(26px, 3.2vw, 34px);
+  margin: 6px 0 12px;
   font-weight: 980;
   letter-spacing: -0.02em;
+}
+.panel__subtitle{
+  margin: 0 auto 18px;
+  max-width: 52rem;
+  text-align: center;
+  color: rgba(11,19,32,.72);
+  font-weight: 850;
+  line-height: 1.55;
+  font-size: 15px;
 }
 
 .panelWrap{
@@ -283,7 +377,7 @@
 }
 
 /* -------------------------
-   FORMS
+   FORMS (NO tocamos lógica, solo estilo)
 -------------------------- */
 .field{
   display:flex;
@@ -419,6 +513,7 @@ input:focus, select:focus, textarea:focus{
   border-bottom: 1px solid rgba(11,19,32,.08);
 }
 .sheet__title{ font-weight: 980; color: rgba(11,19,32,.92); }
+
 .sheet__close{
   width: 40px;
   height: 40px;
@@ -428,6 +523,7 @@ input:focus, select:focus, textarea:focus{
   cursor:pointer;
   font-weight: 980;
 }
+
 .sheet__content{ padding: 14px 16px 16px; }
 
 .sheet__link{
@@ -443,6 +539,18 @@ input:focus, select:focus, textarea:focus{
   border-color: rgba(32,211,230,.22);
 }
 
+.sheet__cta{
+  margin-top: 14px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sheet__phone{
+  font-weight: 980;
+  color: rgba(11,19,32,.86);
+  letter-spacing: .01em;
+}
+
 /* -------------------------
    FOOTER
 -------------------------- */
@@ -451,13 +559,14 @@ input:focus, select:focus, textarea:focus{
   border-top: 1px solid rgba(11,19,32,.08);
   background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.86));
 }
+
 .footer__grid{
   display:grid;
   gap: 18px;
   grid-template-columns: 1fr;
 }
 @media(min-width: 900px){
-  .footer__grid{ grid-template-columns: 1.1fr .9fr .9fr; }
+  .footer__grid{ grid-template-columns: 1.15fr .85fr; }
 }
 
 .footerCard{
@@ -467,6 +576,7 @@ input:focus, select:focus, textarea:focus{
   padding: 18px;
   box-shadow: var(--shadow-soft);
 }
+
 .footer h4{
   margin:0 0 10px;
   color: rgba(11,19,32,.92);
@@ -481,27 +591,19 @@ input:focus, select:focus, textarea:focus{
 }
 .footer a:hover{ color: rgba(11,19,32,.88); }
 
-.footer__bottom{
-  margin-top: 16px;
-  color: rgba(11,19,32,.62);
-  font-size: 13px;
-  font-weight: 850;
-  text-align: center;
-}
-
-/* Footer pro extras */
 .footerBrand{
   display:flex;
-  gap: 12px;
+  gap: 14px;
   align-items:center;
 }
 .footerBrand__logo{
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 72px;   /* ✅ pedido: agrandar logo en footer */
+  height: 72px;
+  border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 14px 30px rgba(0,0,0,.12);
 }
+
 .footerFacts{
   margin-top: 12px;
   display:flex;
@@ -527,6 +629,7 @@ input:focus, select:focus, textarea:focus{
   height: 16px;
   fill: rgba(11,19,32,.92);
 }
+
 .footerLinks{
   list-style:none;
   padding:0;
@@ -538,6 +641,27 @@ input:focus, select:focus, textarea:focus{
 .footerLinks a{
   text-decoration:none;
   font-weight: 850;
+}
+
+/* Footer bottom con logo (si tu Footer lo usa) */
+.footer__bottom{
+  margin-top: 16px;
+  color: rgba(11,19,32,.62);
+  font-size: 13px;
+  font-weight: 850;
+  text-align: center;
+}
+.footer__bottomInner{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+}
+.footer__bottomLogo{
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
 }
 
 /* -------------------------
@@ -557,7 +681,7 @@ input:focus, select:focus, textarea:focus{
   [data-reveal]{ opacity:1; transform:none; transition:none; }
 }
 
-/* section spacing helper */
+/* Section helper */
 .section--tight{ padding: 52px 0; }
 
 /* Marquee */
@@ -578,10 +702,22 @@ input:focus, select:focus, textarea:focus{
   animation: marqueeMove 26s linear infinite;
   will-change: transform;
 }
+.marquee:hover .marquee__track{ animation-play-state: paused; }
+
 @keyframes marqueeMove{
   from{ transform: translateX(0); }
   to{ transform: translateX(-50%); }
 }
+
+/* Full width marquee (si usás marquee--full) */
+.marquee--full{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
 .brandLogo{
   width: 120px;
   height: 52px;
@@ -671,7 +807,7 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 20px 45px rgba(0,0,0,.10);
 }
 
-/* preguntas frecuentes FAQ */
+/* FAQ */
 .faqList{ display:flex; flex-direction: column; gap: 14px; }
 .faqItem{
   border-radius: 22px;
@@ -694,7 +830,7 @@ input:focus, select:focus, textarea:focus{
 .faqQ{
   font-weight: 980;
   letter-spacing: -.02em;
-  color: var(--text-on-dark);
+  color: rgba(11,19,32,.92);
 }
 .faqChevron{
   display:inline-flex;
@@ -705,14 +841,14 @@ input:focus, select:focus, textarea:focus{
   justify-content:center;
   background: rgba(43,44,131,.14);
   transition: transform .18s ease;
-  color: var(--text-on-dark);
+  color: rgba(11,19,32,.92);
   font-weight: 950;
 }
 .faqItem[open] .faqChevron{ transform: rotate(180deg); }
 .faqA{
   padding: 0 18px 16px;
-  color: var(--muted-on-dark);
+  color: rgba(11,19,32,.72);
   line-height: 1.65;
-  font-weight: 750;
+  font-weight: 800;
   font-size: 14px;
 }
