@@ -1,0 +1,16 @@
+---
+import type { FaqItem } from "@/data/faqs";
+const { items } = Astro.props as { items: FaqItem[] };
+---
+<div>
+  {items.map((f) => (
+    <details class="form" style="padding:14px 16px;">
+      <summary style="cursor:pointer; color: var(--text-on-dark); font-weight:950;">
+        {f.q}
+      </summary>
+      <div style="margin-top:10px; color: var(--muted-on-dark); font-weight:700; line-height:1.6; font-size:14px;">
+        {f.a}
+      </div>
+    </details>
+  ))}
+</div>

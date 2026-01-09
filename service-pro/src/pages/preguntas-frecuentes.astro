@@ -1,0 +1,25 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/config/site";
+import { FAQS } from "@/data/faqs";
+import FAQList from "@/components/FAQList.astro";
+import SeoJsonLd from "@/components/SeoJsonLd.astro";
+---
+<BaseLayout
+  title={`Preguntas frecuentes | ${SITE.name}`}
+  description={`Respuestas rápidas sobre reservas, zonas y atención de ${SITE.name}.`}
+  pathname="/preguntas-frecuentes"
+>
+  <SeoJsonLd faqs={FAQS} />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="h1">Preguntas frecuentes</h1>
+      <p class="p">Resolvemos lo típico para que coordines rápido.</p>
+
+      <div style="margin-top:18px;">
+        <FAQList items={FAQS} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

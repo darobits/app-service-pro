@@ -1,0 +1,20 @@
+---
+import type { FaqItem } from "@/data/faqs";
+import { jsonLdFaqPage, jsonLdLocalBusiness, jsonLdService } from "@/lib/seo";
+
+type Props = {
+  serviceName?: string;
+  faqs?: FaqItem[];
+};
+
+const { serviceName, faqs } = Astro.props as Props;
+
+const schemas = [
+  jsonLdLocalBusiness(),
+  serviceName ? jsonLdService(serviceName) : null,
+  faqs && faqs.length ? jsonLdFaqPage(faqs) : null,
+].filter(Boolean);
+---
+{schemas.map((obj) => (
+  <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+))}

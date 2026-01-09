@@ -1,0 +1,153 @@
+---
+import { SITE } from "@/config/site";
+
+const { serviceTitle } = Astro.props as { serviceTitle: string };
+
+// key seguro para IDs (evita choques)
+const key = serviceTitle
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/(^-|-$)/g, "");
+
+// IDs únicos
+const idName = `${key}-name`;
+const idZone = `${key}-zone`;
+const idBrand = `${key}-brand`;
+const idIssue = `${key}-issue`;
+const idUrgency = `${key}-urgency`;
+const idAvailability = `${key}-availability`;
+const idBtn = `${key}-waBtn`;
+
+// valores inyectados (bien)
+const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
+---
+
+<div class="form" data-booking={key}>
+  <div class="formHeader">
+    <h2 class="formTitle">Reservar visita por WhatsApp</h2>
+    <p class="formSubtitle">Se abrirá WhatsApp con el mensaje listo para enviar.</p>
+  </div>
+
+  <div class="field">
+    <label for={idName}>Nombre y apellido</label>
+    <input id={idName} name="name" placeholder="Ej: Juan Pérez" autocomplete="name" required />
+  </div>
+
+  <div class="field">
+    <label for={idZone}>Zona / Barrio</label>
+    <input id={idZone} name="zone" placeholder="Ej: Caballito, CABA" autocomplete="address-level2" required />
+  </div>
+
+  <div class="field">
+    <label for={idBrand}>Marca / Modelo (opcional)</label>
+    <input id={idBrand} name="brand" placeholder="Ej: Samsung / Inverter" />
+  </div>
+
+  <div class="field">
+    <label for={idIssue}>¿Qué problema tiene?</label>
+    <textarea id={idIssue} name="issue" placeholder="Contame síntomas, errores, ruidos, etc." required></textarea>
+  </div>
+
+  <div class="field">
+    <label for={idUrgency}>Urgencia</label>
+    <select id={idUrgency} name="urgency" required>
+      <option value="Hoy (si hay disponibilidad)">Hoy (si hay disponibilidad)</option>
+      <option value="24-48 hs">24-48 hs</option>
+      <option value="Esta semana">Esta semana</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for={idAvailability}>Franja horaria preferida</label>
+    <select id={idAvailability} name="availability" required>
+      <option value="8 a 12">8 a 12</option>
+      <option value="12 a 16">12 a 16</option>
+      <option value="16 a 20">16 a 20</option>
+    </select>
+  </div>
+
+  <div class="formActions">
+    <a
+      id={idBtn}
+      class="btn btn--wa btn--waForm"
+      href="#"
+      rel="nofollow noopener"
+      target="_blank"
+      aria-disabled="true"
+    >
+      Reservar visita por WhatsApp
+    </a>
+
+    <p class="formHelp">
+      <strong>Tip:</strong> completá nombre, zona y problema para habilitar el botón.
+    </p>
+  </div>
+
+  <script is:inline define:vars={{ key, serviceTitle, WA_NUMBER }}>
+    (() => {
+      const root = document.querySelector(`.form[data-booking="${key}"]`);
+      if (!root) return;
+
+      const byId = (id) => root.querySelector(`#${CSS.escape(id)}`);
+      const nameEl = byId(`${key}-name`);
+      const zoneEl = byId(`${key}-zone`);
+      const brandEl = byId(`${key}-brand`);
+      const issueEl = byId(`${key}-issue`);
+      const urgencyEl = byId(`${key}-urgency`);
+      const availabilityEl = byId(`${key}-availability`);
+      const btn = byId(`${key}-waBtn`);
+
+      if (!nameEl || !zoneEl || !brandEl || !issueEl || !urgencyEl || !availabilityEl || !btn) return;
+
+      const buildHref = () => {
+        const name = nameEl.value.trim();
+        const zone = zoneEl.value.trim();
+        const brand = brandEl.value.trim();
+        const issue = issueEl.value.trim();
+        const urgency = urgencyEl.value;
+        const availability = availabilityEl.value;
+
+        const ok = name.length > 1 && zone.length > 1 && issue.length > 2;
+
+        const lines = [
+          "Hola! Quiero reservar una visita.",
+          "",
+          `Servicio: ${serviceTitle}`,
+          `Nombre: ${name || "-"}`,
+          `Zona/Barrio: ${zone || "-"}`,
+          brand ? `Marca/Modelo: ${brand}` : null,
+          `Problema: ${issue || "-"}`,
+          `Urgencia: ${urgency}`,
+          `Disponibilidad: ${availability}`,
+        ].filter(Boolean);
+
+        const msg = lines.join("\n");
+
+        // wa.me: sin +, con país
+        const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+        btn.href = url;
+
+        btn.style.opacity = ok ? "1" : ".55";
+        btn.style.pointerEvents = ok ? "auto" : "none";
+        btn.setAttribute("aria-disabled", ok ? "false" : "true");
+      };
+
+      // actualiza mientras escribe
+      ["input", "change"].forEach((evt) => {
+        root.querySelectorAll("input, textarea, select").forEach((el) => el.addEventListener(evt, buildHref));
+      });
+
+      // y al click recalcula por si el browser no disparó input aún
+      btn.addEventListener("click", (e) => {
+        buildHref();
+        if (btn.getAttribute("aria-disabled") === "true") {
+          e.preventDefault();
+        }
+      });
+
+      buildHref();
+    })();
+  </script>
+</div>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/config/site";
+import { ZONES } from "@/data/zones";
+import SeoJsonLd from "@/components/SeoJsonLd.astro";
+import mapaAMBA from "@/assets/images/mapa-amba.jpg";
+---
+<BaseLayout
+  title={`Zonas de atención | ${SITE.name}`}
+  description={`Zonas de atención de ${SITE.name} en CABA y AMBA.`}
+  pathname="/zonas"
+>
+  <SeoJsonLd />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="h1">Zonas de atención</h1>
+      <p class="p">
+        Atendemos <strong>{SITE.coverage}</strong>. Indicá tu barrio/partido al reservar.
+      </p>
+
+      <div class="mapWrap" style="margin-top:18px;">
+        <img
+          src={mapaAMBA.src}
+          width={mapaAMBA.width}
+          height={mapaAMBA.height}
+          alt="Mapa de cobertura AMBA"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="mapWrap__overlay"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2 class="h2">CABA</h2>
+      <ul class="list">
+        {ZONES.caba.map((z) => <li>{z}</li>)}
+      </ul>
+
+      <div class="divider"></div>
+
+      <h2 class="h2">AMBA</h2>
+      <ul class="list">
+        {ZONES.amba.map((z) => <li>{z}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <style>
+    .mapWrap{
+      position: relative;
+      border-radius: calc(var(--radius) + 12px);
+      overflow: hidden;
+      border: 1px solid rgba(11,19,32,.10);
+      background: rgba(255,255,255,.75);
+      box-shadow: var(--shadow-soft);
+      height: clamp(240px, 34vw, 420px);
+      padding: 10px; /* importante para que contain no quede pegado */
+    }
+
+    /* Desktop: ver completa */
+    @media (min-width: 920px){
+      .mapWrap img{
+        object-fit: contain;
+        background: rgba(255,255,255,.75);
+      }
+    }
+
+    /* Mobile: llenar */
+    @media (max-width: 919px){
+      .mapWrap{
+        padding: 0;
+      }
+      .mapWrap img{
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .mapWrap img{
+      width: 100%;
+      height: 100%;
+      display:block;
+      border-radius: calc(var(--radius) + 6px);
+      filter: saturate(1.03) contrast(1.03);
+    }
+
+    .mapWrap__overlay{
+      position:absolute;
+      inset: 0;
+      background:
+        radial-gradient(520px 220px at 20% 10%, rgba(32,211,230,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.00), rgba(11,19,32,.06));
+      pointer-events:none;
+    }
+  </style>
+</BaseLayout>

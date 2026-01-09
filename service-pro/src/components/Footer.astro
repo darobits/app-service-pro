@@ -1,0 +1,39 @@
+---
+import { SITE } from "@/config/site";
+const year = new Date().getFullYear();
+
+const wa =
+  `https://wa.me/${SITE.whatsappE164}?text=` +
+  encodeURIComponent("Hola! Quiero coordinar una visita.");
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footerCard">
+        <h4>{SITE.name}</h4>
+        <p style="margin-bottom:10px;">{SITE.tagline}</p>
+        <p><strong>Cobertura:</strong> {SITE.coverage}</p>
+        <p><strong>Horarios:</strong> {SITE.hours}</p>
+      </div>
+
+      <div class="footerCard">
+        <h4>Contacto</h4>
+        <p><a href={wa}>Reservar por WhatsApp</a></p>
+        <p>{SITE.phoneDisplay}</p>
+        <p>{SITE.addressShort}</p>
+      </div>
+
+      <div class="footerCard">
+        <h4>Accesos</h4>
+        <p><a href="/#servicios">Servicios</a></p>
+        <p><a href="/zonas">Zonas</a></p>
+        <p><a href="/preguntas-frecuentes">Preguntas frecuentes</a></p>
+        <p><a href="/contacto">Contacto</a></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      © {year} {SITE.name} — Desarrollado por {SITE.copyrightAuthor}
+    </div>
+  </div>
+</footer>

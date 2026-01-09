@@ -1,0 +1,96 @@
+---
+import { SITE } from "@/config/site";
+
+const wa =
+  `https://wa.me/${SITE.whatsappE164}?text=` +
+  encodeURIComponent("Hola! Quiero reservar una visita. ¿Disponibilidad?");
+---
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label="Ir al inicio">
+      <img src="/logo-service-pro.png" alt={`${SITE.name} logo`} />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/zonas">Zonas</a>
+      <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+      <a href="/contacto">Contacto</a>
+    </nav>
+
+    <div class="header__cta">
+      <a class="btn btn--wa ctaDesktop" href={wa}>Reservar por WhatsApp</a>
+      <span class="phone phoneDesktop">{SITE.phoneDisplay}</span>
+
+      <!-- Mobile controls -->
+      <a class="btn btn--wa ctaMobile" href={wa} aria-label="Reservar por WhatsApp">
+        WhatsApp
+      </a>
+
+      <button
+        class="menuBtn"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="mobileMenu"
+        data-menu-open
+      >
+        <span class="menuIcon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Sheet -->
+  <div class="sheet" id="mobileMenu" aria-hidden="true">
+    <div class="sheet__backdrop" data-menu-close></div>
+    <div class="sheet__panel" role="dialog" aria-modal="true" aria-label="Menú">
+      <div class="sheet__top">
+        <div class="sheet__title">Menú</div>
+        <button class="sheet__close" type="button" aria-label="Cerrar menú" data-menu-close>✕</button>
+      </div>
+
+      <div class="sheet__content">
+        <a class="sheet__link" href="/#servicios" data-menu-close>Servicios</a>
+        <a class="sheet__link" href="/#como-funciona" data-menu-close>Cómo funciona</a>
+        <a class="sheet__link" href="/zonas" data-menu-close>Zonas</a>
+        <a class="sheet__link" href="/preguntas-frecuentes" data-menu-close>Preguntas frecuentes</a>
+        <a class="sheet__link" href="/contacto" data-menu-close>Contacto</a>
+
+        <div class="sheet__divider"></div>
+
+        <div class="sheet__meta">
+          <div><strong>Tel:</strong> {SITE.phoneDisplay}</div>
+          <div><strong>Cobertura:</strong> {SITE.coverage}</div>
+          <div><strong>Horarios:</strong> {SITE.hours}</div>
+        </div>
+
+        <a class="btn btn--wa sheet__cta" href={wa} data-menu-close>Reservar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const sheet = document.getElementById("mobileMenu");
+    const openBtn = document.querySelector("[data-menu-open]");
+    const closeEls = document.querySelectorAll("[data-menu-close]");
+
+    function openMenu(){
+      sheet?.classList.add("is-open");
+      sheet?.setAttribute("aria-hidden","false");
+      document.documentElement.style.overflow = "hidden";
+    }
+
+    function closeMenu(){
+      sheet?.classList.remove("is-open");
+      sheet?.setAttribute("aria-hidden","true");
+      document.documentElement.style.overflow = "";
+    }
+
+    openBtn?.addEventListener("click", openMenu);
+    closeEls.forEach(el => el.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeMenu();
+    });
+  </script>
+</header>

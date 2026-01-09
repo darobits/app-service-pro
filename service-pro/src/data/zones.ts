@@ -1,0 +1,61 @@
+export const ZONES = {
+  caba: [
+    "Almagro",
+    "Balvanera",
+    "Belgrano",
+    "Caballito",
+    "Colegiales",
+    "Flores",
+    "Palermo",
+    "Recoleta",
+    "San Telmo",
+    "Villa Crespo",
+    "Villa Urquiza",
+  ],
+  amba: [
+    // Zona Sur
+    "Almirante Brown",
+    "Avellaneda",
+    "Berazategui",
+    "Esteban Echeverría",
+    "Ezeiza",
+    "Florencio Varela",
+    "Lanús",
+    "Lomas de Zamora",
+    "Presidente Perón",
+    "Quilmes",
+    "San Vicente",
+
+    // Zona Oeste
+    "Hurlingham",
+    "Ituzaingó",
+    "José C. Paz",
+    "La Matanza",
+    "Malvinas Argentinas",
+    "Merlo",
+    "Moreno",
+    "Morón",
+    "San Miguel",
+    "Tres de Febrero",
+
+    // Zona Norte
+    "Escobar",
+    "General San Martín",
+    "José León Suárez",
+    "San Fernando",
+    "San Isidro",
+    "San Martín",
+    "Tigre",
+    "Vicente López",
+
+    // Cinturón cercano (muy pedido)
+    "San Justo",
+    "Ramos Mejía",
+    "Ciudadela",
+    "Caseros",
+    "Villa Ballester",
+    "Munro",
+    "Florida",
+    "Olivos",
+  ],
+};

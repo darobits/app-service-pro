@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/config/site";
+import { SERVICES } from "@/data/services";
+import SeoJsonLd from "@/components/SeoJsonLd.astro";
+---
+<BaseLayout
+  title={`Servicios | ${SITE.name}`}
+  description={`Servicios de ${SITE.name}: línea blanca, lavarropas, heladeras, aires piso-techo, hornos eléctricos y cámaras frigoríficas en ${SITE.coverage}.`}
+  pathname="/servicios"
+>
+  <SeoJsonLd />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="h1">Servicios</h1>
+      <p class="p">Elegí el servicio para reservar por WhatsApp.</p>
+
+      <div class="divider"></div>
+
+      <ul class="list">
+        {SERVICES.map((s) => (
+          <li><a href={`/servicios/${s.slug}`}>{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

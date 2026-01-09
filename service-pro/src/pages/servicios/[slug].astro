@@ -1,0 +1,76 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SERVICES } from "@/data/services";
+import BookingForm from "@/components/BookingForm.astro";
+import SeoJsonLd from "@/components/SeoJsonLd.astro";
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { slug: s.slug } }));
+}
+
+const { slug } = Astro.params;
+const service = SERVICES.find((s) => s.slug === slug);
+if (!service) throw new Error("Servicio no encontrado");
+---
+<BaseLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  pathname={`/servicios/${service.slug}`}
+>
+  <SeoJsonLd serviceName={service.title} />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="h1">{service.title}</h1>
+      <p class="p">{service.short}</p>
+
+      {service.image && (
+        <div class="serviceBanner" style="margin-top:18px;">
+          <img
+            src={service.image.src}
+            width={service.image.width}
+            height={service.image.height}
+            alt={service.imageAlt ?? service.title}
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="serviceBanner__overlay"></div>
+        </div>
+      )}
+
+      <div style="margin-top:22px;">
+        <BookingForm serviceTitle={service.title} />
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .serviceBanner{
+      position: relative;
+      border-radius: calc(var(--radius) + 12px);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow-soft);
+      height: 220px;
+    }
+    @media(min-width: 920px){
+      .serviceBanner{ height: 260px; }
+    }
+    .serviceBanner img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .serviceBanner__overlay{
+      position:absolute;
+      inset: 0;
+      background:
+        radial-gradient(520px 220px at 20% 10%, rgba(32,211,230,.26), transparent 60%),
+        linear-gradient(180deg, rgba(7,28,52,.10), rgba(7,28,52,.60));
+      pointer-events:none;
+    }
+  </style>
+</BaseLayout>

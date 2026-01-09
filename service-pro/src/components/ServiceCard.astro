@@ -1,0 +1,18 @@
+---
+import type { Service } from "@/data/services";
+const { service } = Astro.props as { service: Service };
+
+const ICONS: Record<Service["icon"], string> = {
+  fridge: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h10v20H7z"/><path d="M7 10h10"/><path d="M9 6h1"/><path d="M9 14h1"/></svg>`,
+  washer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6z"/><path d="M8 6h8"/><circle cx="12" cy="13" r="4"/></svg>`,
+  ac: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="8" rx="2"/><path d="M8 16c0 2-2 2-2 4"/><path d="M12 16c0 2-2 2-2 4"/><path d="M16 16c0 2-2 2-2 4"/></svg>`,
+  oven: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 6h.01M12 6h.01M16 6h.01"/><rect x="8" y="10" width="8" height="6" rx="1"/></svg>`,
+  white: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M6 7l1-3h10l1 3"/><rect x="6" y="7" width="12" height="14" rx="2"/></svg>`,
+  coldroom: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M9 4v16"/><path d="M12 8h5"/><path d="M12 12h5"/><path d="M12 16h5"/></svg>`,
+  other: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4 12H2"/><path d="M22 12h-2"/><path d="M5 5l2 2"/><path d="M17 17l2 2"/><path d="M19 5l-2 2"/><path d="M7 17l-2 2"/></svg>`,
+};
+---
+<a class="card" href={`/servicios/${service.slug}`} aria-label={`Ver ${service.title}`}>
+  <div class="icon" set:html={ICONS[service.icon]} />
+  <div class="card__title">{service.title}</div>
+</a>

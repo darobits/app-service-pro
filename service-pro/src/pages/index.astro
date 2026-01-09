@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/config/site";
+import Hero from "@/components/Hero.astro";
+import TrustBar from "@/components/TrustBar.astro";
+import ServiceGrid from "@/components/ServiceGrid.astro";
+import SeoJsonLd from "@/components/SeoJsonLd.astro";
+---
+<BaseLayout
+  title={`${SITE.name} | ${SITE.tagline}`}
+  description={SITE.description}
+  pathname="/"
+>
+  <SeoJsonLd />
+
+  <Hero />
+  <TrustBar />
+  <ServiceGrid />
+
+  <section class="section" id="como-funciona">
+    <div class="container">
+      <h2 class="h2">Cómo funciona</h2>
+      <p class="p">Elegís el equipo → completás el formulario → se abre WhatsApp con el mensaje listo para enviar.</p>
+    </div>
+  </section>
+</BaseLayout>
