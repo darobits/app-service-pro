@@ -1,14 +1,10 @@
 ---
 import { SERVICES } from "@/data/services";
-import ServiceCard from "@/components/ServiceCard.astro";
+import ServiceCard from "./ServiceCard.astro";
 ---
-<section class="section panelWrap" id="servicios">
-  <div class="container">
-    <div class="panel panel--modern">
-      <div class="panel__title">¿Cómo podemos ayudarte?</div>
-      <div class="grid">
-        {SERVICES.map((s) => <ServiceCard service={s} />)}
-      </div>
-    </div>
-  </div>
-</section>
+
+<div class="serviceGrid" data-reveal>
+  {SERVICES.map((service) => (
+    <ServiceCard service={service} />
+  ))}
+</div>

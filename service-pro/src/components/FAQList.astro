@@ -9,8 +9,9 @@ const { items } = Astro.props as { items: FaqItem[] };
         <span class="faqQ">{f.q}</span>
         <span class="faqChevron" aria-hidden="true">⌄</span>
       </summary>
+
       <div class="faqA">
-        {f.a}
+        <p>{f.a}</p>
       </div>
     </details>
   ))}

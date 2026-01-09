@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { SITE } from "@/config/site";
-import { SERVICES } from "@/data/services";
 import SeoJsonLd from "@/components/SeoJsonLd.astro";
+import ServiceGrid from "@/components/ServiceGrid.astro";
 ---
+
 <BaseLayout
   title={`Servicios | ${SITE.name}`}
-  description={`Servicios de ${SITE.name}: línea blanca, lavarropas, heladeras, aires piso-techo, hornos eléctricos y cámaras frigoríficas en ${SITE.coverage}.`}
+  description={`Elegí el servicio y reservá visita por WhatsApp. Atención en ${SITE.coverage}.`}
   pathname="/servicios"
 >
   <SeoJsonLd />
@@ -14,15 +15,14 @@ import SeoJsonLd from "@/components/SeoJsonLd.astro";
   <section class="section">
     <div class="container">
       <h1 class="h1">Servicios</h1>
-      <p class="p">Elegí el servicio para reservar por WhatsApp.</p>
+      <p class="p">Elegí el servicio y te llevamos al formulario correspondiente.</p>
 
-      <div class="divider"></div>
-
-      <ul class="list">
-        {SERVICES.map((s) => (
-          <li><a href={`/servicios/${s.slug}`}>{s.title}</a></li>
-        ))}
-      </ul>
+      <div class="panelWrap" style="margin-top:18px;">
+        <div class="panel panel--modern" data-reveal>
+          <h2 class="panel__title">¿Cómo podemos ayudarte?</h2>
+          <ServiceGrid />
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

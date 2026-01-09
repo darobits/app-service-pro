@@ -12,14 +12,17 @@ import SeoJsonLd from "@/components/SeoJsonLd.astro";
 >
   <SeoJsonLd faqs={FAQS} />
 
-  <section class="section">
-    <div class="container">
+  <section class="section section--tight">
+  <div class="container">
+    <div class="panel" data-reveal>
       <h1 class="h1">Preguntas frecuentes</h1>
       <p class="p">Resolvemos lo típico para que coordines rápido.</p>
 
-      <div style="margin-top:18px;">
-        <FAQList items={FAQS} />
-      </div>
+      <div class="divider"></div>
+
+      <FAQList items={FAQS} />
     </div>
-  </section>
+  </div>
+</section>
+
 </BaseLayout>
