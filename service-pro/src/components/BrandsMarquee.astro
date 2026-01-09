@@ -2,24 +2,29 @@
 /**
  * BrandsMarquee: trae todos los archivos que empiecen con "logo"
  * desde /src/assets/images y arma un carrusel infinito.
+ *
+ * Nota: usamos query '?url' para garantizar string URLs.
  */
 
-const modules = import.meta.glob("../assets/images/logo*.*", { eager: true });
-
-function toUrl(mod: unknown): string | null {
-  if (mod && typeof mod === "object" && "default" in (mod as any)) {
-    const v = (mod as any).default;
-    return typeof v === "string" ? v : null;
-  }
-  if (typeof mod === "string") return mod;
-  if (mod instanceof URL) return mod.toString();
-  return null;
-}
+const modules = import.meta.glob("../assets/images/logo*.*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
 const logos = Object.values(modules)
-  .map(toUrl)
   .filter((v): v is string => typeof v === "string" && v.length > 0)
-  .sort((a, b) => String(a).localeCompare(String(b), "es"));
+  .sort((a, b) => a.localeCompare(b, "es"));
+
+function niceAlt(src: string) {
+  const file = src.split("/").pop() || "logo";
+  const name = decodeURIComponent(file)
+    .replace(/^logo\s*/i, "")
+    .replace(/\.[a-z0-9]+$/i, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
+  return name ? `Logo ${name}` : "Logo de marca";
+}
 ---
 <section class="section section--tight" data-reveal>
   <div class="container">
@@ -31,7 +36,7 @@ const logos = Object.values(modules)
     <div class="marquee__track">
       {[...logos, ...logos].map((src) => (
         <div class="brandLogo">
-          <img src={src} alt="Logo de marca" loading="lazy" decoding="async" />
+          <img src={src} alt={niceAlt(src)} loading="lazy" decoding="async" />
         </div>
       ))}
     </div>

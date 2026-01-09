@@ -4,11 +4,8 @@ import ServiceCard from "@/components/ServiceCard.astro";
 ---
 <section class="section panelWrap" id="servicios">
   <div class="container">
-    <div class="panel">
+    <div class="panel panel--modern">
       <div class="panel__title">¿Cómo podemos ayudarte?</div>
-      <p class="panel__subtitle">
-        Elegí el equipo y te llevamos a un formulario simple para dejar el problema listo y abrir WhatsApp con el mensaje armado.
-      </p>
       <div class="grid">
         {SERVICES.map((s) => <ServiceCard service={s} />)}
       </div>
