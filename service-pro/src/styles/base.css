@@ -8,8 +8,8 @@ body{
   /* Fondo equilibrado: claro + un “halo” brand arriba */
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(32,211,230,.18), transparent 60%),
-    radial-gradient(900px 520px at 88% -10%, rgba(255,75,75,.12), transparent 60%),
-    linear-gradient(180deg, #eef3fb, var(--page));
+    radial-gradient(900px 520px at 88% -10%, rgba(178, 11, 11, 0.12), transparent 60%),
+    linear-gradient(180deg, #9db9e5, var(--page));
 }
 
 a{ color: inherit; text-decoration: none; }
