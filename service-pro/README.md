@@ -1,46 +1,35 @@
-# Astro Starter Kit: Basics
+# Service Pro 
+**Sitio web profesional para servicio técnico a domicilio**
 
-```sh
-npm create astro@latest -- --template basics
-```
+Service Pro es un sitio web moderno, rápido y optimizado para SEO, diseñado para negocios de **servicio técnico** (aires acondicionados, heladeras, lavarropas, etc.) que necesitan **presencia digital, generación de contactos y posicionamiento local**.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El proyecto está construido con **Astro** siguiendo buenas prácticas de arquitectura frontend, rendimiento y SEO técnico.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## Características principales
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- **Ultra rápido** (Astro + Static Site Generation)
+- **Responsive** (mobile-first)
+- **SEO local optimizado**
+  - Meta tags dinámicos
+  - Open Graph
+  - JSON-LD (LocalBusiness, Services, FAQ)
+  - Canonical URLs
+- Cobertura por **zonas (CABA + AMBA)**
+- Servicios dinámicos por data (`services.ts`)
+- **Contacto directo vía WhatsApp**
+- Arquitectura limpia y escalable
+- Preparado para deploy en Vercel / Netlify
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## Stack tecnológico
 
-All commands are run from the root of the project, from a terminal:
+- **Astro**
+- **CSS modular** (tokens + base + components)
+- **TypeScript** (config y data)
+- **HTML semántico**
+- **SEO estructurado (Schema.org)**
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---

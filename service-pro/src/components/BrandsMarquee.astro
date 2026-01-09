@@ -1,0 +1,45 @@
+---
+/**
+ * BrandsMarquee: trae todos los archivos que empiecen con "logo"
+ * desde /src/assets/images y arma un carrusel infinito.
+ *
+ */
+
+const modules = import.meta.glob("../assets/images/logo*.*", { eager: true });
+
+function toUrl(mod: unknown): string | null {
+  // Caso típico: { default: "..." }
+  if (mod && typeof mod === "object" && "default" in (mod as any)) {
+    const v = (mod as any).default;
+    return typeof v === "string" ? v : null;
+  }
+  // Caso raro: directamente string
+  if (typeof mod === "string") return mod;
+
+  // Caso raro: URL instance
+  if (mod instanceof URL) return mod.toString();
+
+  return null;
+}
+
+const logos = Object.values(modules)
+  .map(toUrl)
+  .filter((v): v is string => typeof v === "string" && v.length > 0)
+  .sort((a, b) => String(a).localeCompare(String(b), "es"));
+---
+<section class="section section--tight" data-reveal>
+  <div class="container">
+    <h2 class="h2">Trabajamos con primeras marcas</h2>
+    <p class="p">Repuestos y diagnósticos con experiencia real en equipos de uso diario.</p>
+
+    <div class="marquee" aria-label="Marcas con las que trabajamos">
+      <div class="marquee__track">
+        {[...logos, ...logos].map((src) => (
+          <div class="brandLogo">
+            <img src={src} alt="Logo de marca" loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

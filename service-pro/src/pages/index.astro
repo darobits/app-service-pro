@@ -5,6 +5,11 @@ import Hero from "@/components/Hero.astro";
 import TrustBar from "@/components/TrustBar.astro";
 import ServiceGrid from "@/components/ServiceGrid.astro";
 import SeoJsonLd from "@/components/SeoJsonLd.astro";
+import BrandsMarquee from "@/components/BrandsMarquee.astro";
+
+const Bolt = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>`;
+const Shield = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z"/></svg>`;
+const Tools = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 19l-8-8 2-2 8 8-2 2zM2 19l8-8-2-2-8 8 2 2zm11-9l2-2-3-3c.6-1.6.2-3.5-1.2-4.9-1.7-1.7-4.4-1.7-6.1 0l3 3-2 2-3-3c-1.7 1.7-1.7 4.4 0 6.1 1.4 1.4 3.3 1.8 4.9 1.2l3 3-2 2 3 3 2-2 3 3 2-2-3-3 2-2-3-3z"/></svg>`;
 ---
 <BaseLayout
   title={`${SITE.name} | ${SITE.tagline}`}
@@ -13,14 +18,81 @@ import SeoJsonLd from "@/components/SeoJsonLd.astro";
 >
   <SeoJsonLd />
 
-  <Hero />
-  <TrustBar />
-  <ServiceGrid />
+  <div data-reveal>
+    <Hero />
+  </div>
 
-  <section class="section" id="como-funciona">
+  <div data-reveal>
+    <TrustBar />
+  </div>
+
+  <div data-reveal id="servicios">
+    <ServiceGrid />
+  </div>
+
+  <BrandsMarquee />
+
+  <section class="section" id="como-funciona" data-reveal>
     <div class="container">
       <h2 class="h2">Cómo funciona</h2>
-      <p class="p">Elegís el equipo → completás el formulario → se abre WhatsApp con el mensaje listo para enviar.</p>
+      <p class="p">
+        Coordinamos rápido y sin vueltas: nos contás el problema, confirmamos disponibilidad y listo.
+        Todo por WhatsApp para que no pierdas tiempo.
+      </p>
+
+      <div class="steps">
+        <div class="stepCard">
+          <div class="stepIcon" set:html={Tools} />
+          <h3>1) Elegís el equipo</h3>
+          <p>Seleccioná el servicio y contanos marca/modelo si lo tenés a mano.</p>
+        </div>
+
+        <div class="stepCard">
+          <div class="stepIcon" set:html={Bolt} />
+          <h3>2) Describís el problema</h3>
+          <p>Errores, ruidos, pérdida de frío, no enciende: cuanto más claro, mejor diagnóstico.</p>
+        </div>
+
+        <div class="stepCard">
+          <div class="stepIcon" set:html={Shield} />
+          <h3>3) Coordinamos la visita</h3>
+          <p>Te respondemos por WhatsApp y coordinamos franja horaria según tu zona.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quienes-somos" data-reveal>
+    <div class="container">
+      <h2 class="h2">Quiénes somos</h2>
+      <p class="p">
+        Somos una <strong>empresa familiar</strong> con más de <strong>15 años de experiencia</strong> en CABA y AMBA.
+        Arrancamos con reparaciones a domicilio “de barrio”, y crecimos por recomendación: laburo prolijo, trato humano
+        y explicaciones claras (sin chamuyo).
+      </p>
+      <p class="p">
+        Hoy combinamos esa forma clásica de atender —responsabilidad y palabra— con un sistema simple:
+        coordinás por WhatsApp, llegamos con herramientas, y trabajamos con criterio técnico.
+        Si conviene reparar, se repara. Si no conviene, te lo decimos de frente.
+      </p>
+
+      <div class="callout">
+        <strong>Promesa Service Pro:</strong> diagnóstico honesto, coordinación rápida y trabajo prolijo.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" data-reveal>
+    <div class="container">
+      <div class="ctaPanel">
+        <div>
+          <h2 class="h2" style="margin:0;">¿Listo para coordinar?</h2>
+          <p class="p" style="margin:10px 0 0;">
+            Entrás por el servicio, completás los datos y abrís WhatsApp con el mensaje listo.
+          </p>
+        </div>
+        <a class="btn btn--primary btn--pro" href="/contacto">Ir a contacto</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
