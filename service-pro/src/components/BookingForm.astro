@@ -45,10 +45,11 @@ const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
     <input id={idBrand} name="brand" placeholder="Ej: Samsung / Inverter" />
   </div>
 
-  <div class="field">
+  <div class="field field--full">
     <label for={idIssue}>¿Qué problema tiene?</label>
     <textarea id={idIssue} name="issue" placeholder="Contame síntomas, errores, ruidos, etc." required></textarea>
   </div>
+
 
   <div class="field">
     <label for={idUrgency}>Urgencia</label>
@@ -112,16 +113,26 @@ const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
         const ok = name.length > 1 && zone.length > 1 && issue.length > 2;
 
         const lines = [
-          "Hola! Quiero reservar una visita.",
-          "",
-          `Servicio: ${serviceTitle}`,
-          `Nombre: ${name || "-"}`,
-          `Zona/Barrio: ${zone || "-"}`,
-          brand ? `Marca/Modelo: ${brand}` : null,
-          `Problema: ${issue || "-"}`,
-          `Urgencia: ${urgency}`,
-          `Disponibilidad: ${availability}`,
-        ].filter(Boolean);
+  "Hola! Me comunico desde la pagina web.",
+  "Quiero coordinar una visita tecnica!",
+  "",
+  `- Servicio: ${serviceTitle}`,
+  brand ? `- Marca/Modelo: ${brand}` : "- Marca/Modelo: -",
+  `- Problema: ${issue || "-"}`,
+  "",
+  "------------------------------",
+  "Contacto:",
+  `- Nombre: ${name || "-"}`,
+  `- Franja disponible para visita: ${availability}`,
+  `- Urgencia: ${urgency}`,
+  "",
+  "Gracias! Quedo atento/a.",
+].filter(Boolean);
+
+
+  
+
+
 
         const msg = lines.join("\n");
 

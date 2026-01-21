@@ -38,10 +38,12 @@ if (!service) throw new Error("Servicio no encontrado");
         </div>
       )}
 
-      <div style="margin-top:22px;">
-        <BookingForm serviceTitle={service.title} />
+            <div class="panelWrap" style="margin-top:22px;">
+        <div class="panel panel--modern panel--booking" data-reveal>
+          <BookingForm serviceTitle={service.title} />
+        </div>
       </div>
-    </div>
+
   </section>
 
   <style>
