@@ -1,19 +1,27 @@
 /* =========================================================
-   COMPONENTS.CSS (PRO / responsive perfecto)
-   - Header pro + mobile prolijo
-   - Buttons
-   - Panels / About / CTA
-   - Marquee logos
-   - Steps sólido (no transparente)
-   - Sheet mobile
-   - Footer 3 cajas (en PC en una fila)
-   - Reveal
-   - ✅ ServiceGrid/ServiceCard moderno (último cambio)
+   COMPONENTS.CSS (PRO / responsive)
+   ---------------------------------------------------------
+   Índice:
+   1) Header (sticky + nav + CTA)
+   2) Buttons
+   3) Panels / About / CTA
+   4) Reveal (animación on-scroll)
+   5) Marquee (logos)
+   6) Steps (Cómo funciona)
+   7) Sheet (mobile menu)
+   8) Footer
+   9) Services Grid / Card  ✅ (corrección: panel fuera, grid puro)
    ========================================================= */
 
-/* -------------------------
-   HEADER
--------------------------- */
+
+/* =========================================================
+   1) HEADER
+   - Barra sticky con blur + hover
+   - Brand (logo + textos)
+   - Nav desktop
+   - CTA (tel + WhatsApp + menu mobile)
+   ========================================================= */
+
 .header{
   position: sticky;
   top: 0;
@@ -112,7 +120,7 @@
 }
 .nav__link:hover::after{ width:100%; }
 
-/* CTA */
+/* CTA right */
 .header__cta{
   display:flex;
   align-items:center;
@@ -161,7 +169,7 @@
 .waIconBtn:active{ transform: translateY(1px); }
 .btn__icon svg{ width:20px; height:20px; fill: currentColor; }
 
-/* Menu button */
+/* Menu button (mobile) */
 .menuBtn{
   width: 46px;
   height: 46px;
@@ -179,7 +187,7 @@
 .menuBtn:active{ transform: translateY(1px); }
 @media (min-width: 920px){ .menuBtn{ display:none; } }
 
-/* hamburguesa perfecta */
+/* hamburguesa */
 .menuIcon{
   width: 18px;
   height: 2px;
@@ -201,9 +209,12 @@
 .menuIcon::before{ top: -6px; }
 .menuIcon::after{ top: 6px; }
 
-/* -------------------------
-   BUTTONS
--------------------------- */
+
+/* =========================================================
+   2) BUTTONS
+   - Base + variantes
+   ========================================================= */
+
 .btn{
   border:0;
   cursor:pointer;
@@ -284,9 +295,14 @@
   font-size: 15px;
 }
 
-/* -------------------------
-   PANELS / ABOUT / CTA
--------------------------- */
+
+/* =========================================================
+   3) PANELS / ABOUT / CTA
+   - Panel genérico + moderno (background)
+   - About box
+   - CTA panel
+   ========================================================= */
+
 .panel{
   background: var(--surface);
   border: 1px solid rgba(11,19,32,.10);
@@ -294,12 +310,23 @@
   padding: 26px;
   box-shadow: var(--shadow);
 }
+
+/* Panel moderno (el look “premium” que querés replicar) */
 .panel--modern{
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(32,211,230,.16), transparent 62%),
     radial-gradient(900px 520px at 88% -10%, rgba(255,75,75,.10), transparent 62%),
     rgba(255,255,255,.90);
 }
+
+/* Ajuste específico para panel que contiene la grilla de servicios */
+.panel--services{
+  padding: 24px;
+}
+@media (min-width: 920px){
+  .panel--services{ padding: 28px; }
+}
+
 .panel__title{
   text-align:center;
   color: rgba(11,19,32,.92);
@@ -307,6 +334,11 @@
   margin: 6px 0 18px;
   font-weight: 980;
   letter-spacing: -0.02em;
+}
+
+/* Wrap opcional (espaciado alrededor de paneles) */
+.panelWrap{
+  width: 100%;
 }
 
 .aboutBox{
@@ -344,9 +376,11 @@
   }
 }
 
-/* -------------------------
-   REVEAL
--------------------------- */
+
+/* =========================================================
+   4) REVEAL (animación on-scroll)
+   ========================================================= */
+
 [data-reveal]{
   opacity: 0;
   transform: translateY(14px);
@@ -358,9 +392,11 @@
   [data-reveal]{ opacity:1; transform:none; transition:none; }
 }
 
-/* -------------------------
-   MARQUEE (logos)
--------------------------- */
+
+/* =========================================================
+   5) MARQUEE (logos)
+   ========================================================= */
+
 .section--tight{ padding: 52px 0; }
 
 .marquee{
@@ -409,9 +445,11 @@
   object-fit: contain;
 }
 
-/* -------------------------
-   STEPS (Cómo funciona) sólido
--------------------------- */
+
+/* =========================================================
+   6) STEPS (Cómo funciona)
+   ========================================================= */
+
 .steps{
   margin-top: 18px;
   display:grid;
@@ -439,9 +477,11 @@
 }
 .stepIcon svg{ width: 22px; height: 22px; fill: rgba(11,19,32,.92); }
 
-/* -------------------------
-   SHEET (mobile menu)
--------------------------- */
+
+/* =========================================================
+   7) SHEET (mobile menu)
+   ========================================================= */
+
 .sheet{
   position: fixed;
   inset: 0;
@@ -516,9 +556,11 @@
   color: rgba(11,19,32,.80);
 }
 
-/* -------------------------
-   FOOTER (3 cajas, en PC 3 en fila)
--------------------------- */
+
+/* =========================================================
+   8) FOOTER
+   ========================================================= */
+
 .footer{
   padding: 46px 0 28px;
   border-top: 1px solid rgba(11,19,32,.08);
@@ -529,8 +571,6 @@
   gap: 18px;
   grid-template-columns: 1fr;
 }
-
-/* PC: 3 cajas en una misma fila */
 @media(min-width: 900px){
   .footer__grid{ grid-template-columns: 1.05fr .95fr .95fr; }
 }
@@ -606,7 +646,6 @@
 }
 .footerLinks a{ text-decoration:none; font-weight: 850; }
 
-/* separación extra para botones de contacto */
 .footerCtas{
   display:flex;
   flex-direction: column;
@@ -637,50 +676,39 @@
   box-shadow: 0 10px 22px rgba(0,0,0,.10);
 }
 
+
 /* =========================================================
-   ✅ SERVICES GRID / CARD (FIX)
-   - Vuelve a “UNA SOLA CAJA” como antes (panel centrado)
-   - Saca subtítulo (desc)
-   - Cards compactas, centradas, prolijas
+   9) ✅ SERVICES GRID / CARD (FIX)
+   ---------------------------------------------------------
+   Objetivo:
+   - El panel lo da: .panel .panel--modern (título + fondo)
+   - .serviceGrid = SOLO grilla (sin background / sin padding de panel)
+   - Cards modernas y compactas
    ========================================================= */
 
-/* ✅ la grilla ahora ES el panel */
+/* Grilla pura (sin panel) */
 .serviceGrid{
-  /* caja/panel */
-  max-width: 1060px;
-  margin: 18px auto 0;
-  padding: 22px;
-  border-radius: calc(var(--radius) + 18px);
-  border: 1px solid rgba(11,19,32,.10);
-  box-shadow: 0 20px 70px rgba(10,20,40,.12);
-  background:
-    radial-gradient(900px 520px at 18% -10%, rgba(32,211,230,.16), transparent 62%),
-    radial-gradient(900px 520px at 88% -10%, rgba(255,75,75,.08), transparent 62%),
-    rgba(255,255,255,.90);
-
-  /* grilla interna */
   display:grid;
   gap: 14px;
   grid-template-columns: 1fr;
+  margin-top: 18px; /* separa título del grid */
 }
 
 /* 2 columnas en tablet */
 @media (min-width: 720px){
   .serviceGrid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 24px;
   }
 }
 
-/* 3 columnas en desktop (como tu caja original) */
+/* 3 columnas en desktop */
 @media (min-width: 1080px){
   .serviceGrid{
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 26px;
   }
 }
 
-/* ✅ card compacta: solo icono + título + chevron */
+/* Card */
 .serviceCard{
   display:flex;
   align-items:center;
@@ -742,7 +770,7 @@
   line-height: 1.15;
 }
 
-/* ✅ CHAU subtítulo */
+/* Subtítulo oculto (como venías usando) */
 .serviceCard__desc{ display:none !important; }
 
 .serviceCard__chev{
@@ -765,9 +793,8 @@
 
 /* Compacto en mobile */
 @media (max-width: 420px){
-  .serviceGrid{ padding: 18px; }
+  .panel--services{ padding: 18px; }
   .serviceCard{ padding: 14px 14px; }
   .serviceCard__icon{ width: 48px; height: 48px; }
   .serviceCard__chev{ width: 36px; height: 36px; }
 }
-
