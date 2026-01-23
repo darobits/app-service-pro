@@ -398,30 +398,47 @@
 /* =========================================================
    5) MARQUEE (logos)
    ========================================================= */
+/* =========================================================
+   MARQUEE (logos) ✅ Ajuste premium
+   - Pastillas más grandes
+   - Logos más visibles
+   - Track con altura prolija (antes estaba enorme por padding 90px)
+   ========================================================= */
 
 .section--tight{ padding: 52px 0; }
 
 .marquee{
   margin-top: 18px;
-  overflow:hidden;
-  border-radius: 22px;
+  overflow: hidden;
+
+  /* contenedor más “pro” */
+  border-radius: 26px;
   border: 1px solid rgba(11,19,32,.12);
-  background: rgba(255,255,255,.70);
-  box-shadow: 0 20px 60px rgba(0,0,0,.10);
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 24px 70px rgba(0,0,0,.10);
 }
+
+/* carril */
 .marquee__track{
-  display:flex;
-  gap: 22px;
-  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+
+  /* antes: gap 22 y padding 90px (demasiado alto) */
+  gap: 16px;
+  padding: 18px 20px;
+
   width: max-content;
   animation: marqueeMove 26s linear infinite;
   will-change: transform;
 }
+
 .marquee:hover .marquee__track{ animation-play-state: paused; }
+
 @keyframes marqueeMove{
   from{ transform: translateX(0); }
   to{ transform: translateX(-50%); }
 }
+
 .marquee--full{
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -429,23 +446,65 @@
   border-left: none;
   border-right: none;
 }
+
+/* pastilla */
 .brandLogo{
-  width: 120px;
-  height: 52px;
+  width: 300px;          /* ✅ más ancho */
+  height: 200px;          /* ✅ más alto */
+  padding: 10px 14px;    /* ✅ aire interno */
+
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius: 16px;
-  background: rgba(255,255,255,.92);
+
+  border-radius: 18px;
+  background: rgba(255,255,255,.94);
   border: 1px solid rgba(11,19,32,.10);
-  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 14px 34px rgba(10,20,40,.10);
+
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
 }
-.brandLogo:hover{ transform: translateY(-2px); box-shadow: 0 12px 22px rgba(0,0,0,.10); }
+
+.brandLogo:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px rgba(10,20,40,.14);
+  border-color: rgba(32,211,230,.25);
+  filter: saturate(1.02);
+}
+
+/* logo: tamaño consistente por ALTURA (se ven parejos) */
 .brandLogo img{
-  width: 92%;
-  height: 70%;
+  height: 120px;          /* ✅ subí/bajá este número y listo */
+  width: auto;           /* mantiene proporción */
+  max-width: 170px;      /* evita que uno enorme se coma la pastilla */
   object-fit: contain;
+  display:block;
+
+  /* opcional: mejora visual */
+  filter: saturate(1.05) contrast(1.02);
 }
+
+
+/* responsive */
+@media (max-width: 520px){
+  .marquee__track{
+    padding: 16px 16px;
+    gap: 12px;
+  }
+
+  .brandLogo{
+    width: 132px;
+    height: 64px;
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+
+  .brandLogo img{
+    height: 44px;
+     max-width: 120px;
+  }
+}
+
 
 
 /* =========================================================
@@ -562,19 +621,26 @@
 /* =========================================================
    8) FOOTER
    ========================================================= */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .footer{
   padding: 46px 0 28px;
   border-top: 1px solid rgba(11,19,32,.08);
   background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.86));
 }
+
 .footer__grid{
   display:grid;
   gap: 18px;
   grid-template-columns: 1fr;
 }
+
 @media(min-width: 900px){
-  .footer__grid{ grid-template-columns: 1.05fr .95fr .95fr; }
+  .footer__grid{
+    grid-template-columns: 1.05fr .95fr .95fr;
+  }
 }
 
 .footerCard{
@@ -590,20 +656,28 @@
   color: rgba(11,19,32,.92);
   font-weight: 980;
 }
-.footer p, .footer a{
+
+.footer p,
+.footer a{
   margin:0;
   color: rgba(11,19,32,.70);
   line-height: 1.65;
   font-weight: 800;
   font-size: 14px;
 }
-.footer a:hover{ color: rgba(11,19,32,.88); }
+
+.footer a:hover{
+  color: rgba(11,19,32,.88);
+}
+
+/* Brand */
 
 .footerBrand{
   display:flex;
   gap: 14px;
   align-items:center;
 }
+
 .footerBrand__logo{
   width: 72px;
   height: 72px;
@@ -612,17 +686,21 @@
   box-shadow: 0 14px 30px rgba(0,0,0,.12);
 }
 
+/* Facts */
+
 .footerFacts{
   margin-top: 12px;
   display:flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .fact{
   display:flex;
   gap: 10px;
   align-items: center;
 }
+
 .fact__icon{
   width: 28px;
   height: 28px;
@@ -632,11 +710,14 @@
   justify-content:center;
   background: rgba(43,44,131,.14);
 }
+
 .fact__icon svg{
   width: 16px;
   height: 16px;
   fill: rgba(11,19,32,.92);
 }
+
+/* Links */
 
 .footerLinks{
   list-style:none;
@@ -646,17 +727,31 @@
   flex-direction: column;
   gap: 10px;
 }
-.footerLinks a{ text-decoration:none; font-weight: 850; }
+
+.footerLinks a{
+  text-decoration:none;
+  font-weight: 850;
+}
+
+/* =========================================================
+   FOOTER – CTAs
+   Ajuste de separación entre botones
+   ========================================================= */
 
 .footerCtas{
   display:flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 12px;
+  gap: 22px;          /* ⬅️ antes 14px */
+  margin-top: 16px;   /* ⬅️ antes 12px */
 }
+
 @media(min-width: 900px){
-  .footerCtas{ gap: 12px; }
+  .footerCtas{
+    gap: 18px;        /* ⬅️ más aire en desktop */
+  }
 }
+
+/* Bottom */
 
 .footer__bottom{
   margin-top: 16px;
@@ -665,11 +760,13 @@
   font-weight: 850;
   text-align: center;
 }
+
 .footer__bottomInner{
   display:inline-flex;
   align-items:center;
   gap: 10px;
 }
+
 .footer__bottomLogo{
   width: 28px;
   height: 28px;
@@ -677,6 +774,7 @@
   object-fit: cover;
   box-shadow: 0 10px 22px rgba(0,0,0,.10);
 }
+
 
 
 /* =========================================================
