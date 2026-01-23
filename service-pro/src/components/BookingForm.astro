@@ -47,9 +47,13 @@ const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
 
   <div class="field field--full">
     <label for={idIssue}>¿Qué problema tiene?</label>
-    <textarea id={idIssue} name="issue" placeholder="Contame síntomas, errores, ruidos, etc." required></textarea>
+    <textarea
+      id={idIssue}
+      name="issue"
+      placeholder="Contame síntomas, errores, ruidos, etc."
+      required
+    ></textarea>
   </div>
-
 
   <div class="field">
     <label for={idUrgency}>Urgencia</label>
@@ -102,42 +106,65 @@ const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
 
       if (!nameEl || !zoneEl || !brandEl || !issueEl || !urgencyEl || !availabilityEl || !btn) return;
 
+      // Limpieza FUERTE y estable para WhatsApp:
+      // - elimina caracteres de formato (* _ ~ `) y cualquier asterisco que se cuele
+      // - elimina invisibles (ZWSP/BOM)
+      // - normaliza espacios
+      // - convierte a ASCII seguro (sin tildes) para evitar reemplazos raros (·, °, *)
+      const toAsciiSafe = (s) => {
+        const str = String(s ?? "")
+          .replace(/[\u200B-\u200D\uFEFF]/g, "")   // invisibles
+          .replace(/[*_~`]/g, "")                  // formato WA
+          .replace(/\u00B7/g, " ")                 // middle dot
+          .replace(/\u00B0/g, " ")                 // degree (°) por si aparece
+          .replace(/\r\n|\r/g, "\n")
+          .replace(/[ \t]+/g, " ")
+          .trim();
+
+        // saca tildes/acentos, y deja solo ASCII imprimible + saltos de línea
+        return str
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^\x20-\x7E\n]/g, "");
+      };
+
       const buildHref = () => {
-        const name = nameEl.value.trim();
-        const zone = zoneEl.value.trim();
-        const brand = brandEl.value.trim();
-        const issue = issueEl.value.trim();
-        const urgency = urgencyEl.value;
-        const availability = availabilityEl.value;
+        const name = toAsciiSafe(nameEl.value);
+        const zone = toAsciiSafe(zoneEl.value);
+        const brand = toAsciiSafe(brandEl.value);
+        const issue = toAsciiSafe(issueEl.value);
+        const urgency = toAsciiSafe(urgencyEl.value);
+        const availability = toAsciiSafe(availabilityEl.value);
+        const safeServiceTitle = toAsciiSafe(serviceTitle);
 
         const ok = name.length > 1 && zone.length > 1 && issue.length > 2;
 
         const lines = [
-  "Hola! Me comunico desde la pagina web.",
-  "Quiero coordinar una visita tecnica!",
-  "",
-  `- Servicio: ${serviceTitle}`,
-  brand ? `- Marca/Modelo: ${brand}` : "- Marca/Modelo: -",
-  `- Problema: ${issue || "-"}`,
-  "",
-  "------------------------------",
-  "Contacto:",
-  `- Nombre: ${name || "-"}`,
-  `- Franja disponible para visita: ${availability}`,
-  `- Urgencia: ${urgency}`,
-  "",
-  "Gracias! Quedo atento/a.",
-].filter(Boolean);
-
-
-  
-
-
+          "Hola! Me comunico desde la pagina web.",
+          "Quiero coordinar una visita tecnica!",
+          "",
+          `- Servicio: ${safeServiceTitle}`,
+          `- Marca/Modelo: ${brand || "-"}`,
+          `- Problema: ${issue || "-"}`,
+          "",
+          "---------------------------------------------",
+          "Contacto:",
+          `- Nombre: ${name || "-"}`,
+          `- Franja disponible para visita: ${availability}`,
+          `- Urgencia: ${urgency}`,
+          "",
+          "Gracias! Quedo atento/a.",
+        ];
 
         const msg = lines.join("\n");
 
-        // wa.me: sin +, con país
-        const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+        // Volvemos al endpoint clásico (suele ser más estable que wa.me en algunos casos)
+        const url =
+          "https://api.whatsapp.com/send?phone=" +
+          WA_NUMBER +
+          "&text=" +
+          encodeURIComponent(msg);
+
         btn.href = url;
 
         btn.style.opacity = ok ? "1" : ".55";
@@ -145,12 +172,10 @@ const WA_NUMBER = SITE.whatsappE164; // "5491131377110"
         btn.setAttribute("aria-disabled", ok ? "false" : "true");
       };
 
-      // actualiza mientras escribe
       ["input", "change"].forEach((evt) => {
         root.querySelectorAll("input, textarea, select").forEach((el) => el.addEventListener(evt, buildHref));
       });
 
-      // y al click recalcula por si el browser no disparó input aún
       btn.addEventListener("click", (e) => {
         buildHref();
         if (btn.getAttribute("aria-disabled") === "true") {
