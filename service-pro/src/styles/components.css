@@ -12,6 +12,8 @@
    8) Footer
    9) Services Grid / Card  ✅ (corrección: panel fuera, grid puro)
    10) Booking Form ✅ (form premium + layout + inputs)
+   11) FAQ ✅ (accordion premium)
+
    ========================================================= */
 
 
@@ -1057,6 +1059,162 @@
   .field :is(input, select, textarea){ border-radius: 14px; }
   .btn--waForm{ border-radius: 16px; }
 }
+
+
+/* =========================================================
+   11) FAQ ✅ (accordion premium + color dinámico)
+   - Pregunta cambia de color al abrir
+   - Respuesta con color diferenciado
+   - Transiciones suaves
+   ========================================================= */
+
+.faqList{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* item */
+.faqItem{
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(11,19,32,.10);
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 14px 30px rgba(10,20,40,.08);
+  overflow: hidden;
+  transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+/* barrita superior */
+.faqItem::before{
+  content:"";
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  top: 10px;
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(32,211,230,.55), rgba(43,44,131,.35));
+  opacity: .18;
+  transition: opacity .18s ease;
+}
+
+.faqItem:hover{
+  border-color: rgba(32,211,230,.22);
+}
+
+/* summary */
+.faqSummary{
+  list-style: none;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 16px 16px;
+  user-select: none;
+}
+
+.faqSummary::-webkit-details-marker{ display:none; }
+
+/* PREGUNTA */
+.faqQ{
+  font-weight: 980;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: rgba(11,19,32,.88);
+  transition: color .18s ease;
+}
+
+/* CHEVRON */
+.faqChevron{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(11,19,32,.08);
+  box-shadow: 0 10px 22px rgba(10,20,40,.08);
+  font-size: 20px;
+  font-weight: 980;
+  color: rgba(11,19,32,.65);
+  transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+
+/* ESTADO ABIERTO */
+.faqItem[open]{
+  border-color: rgba(32,211,230,.35);
+  background:
+    radial-gradient(520px 220px at 12% 0%, rgba(32,211,230,.14), transparent 55%),
+    rgba(255,255,255,.96);
+}
+
+.faqItem[open]::before{
+  opacity: .55;
+}
+
+/* 👉 pregunta activa con color */
+.faqItem[open] .faqQ{
+  color: rgba(9, 20, 174, 0.95);
+}
+
+/* chevron activo */
+.faqItem[open] .faqChevron{
+  transform: rotate(180deg);
+  background: rgba(32,211,230,.18);
+  color: rgba(11,19,32,.90);
+}
+
+/* RESPUESTA */
+.faqA{
+  padding: 0 16px 16px;
+  animation: fadeInFaq .18s ease;
+}
+
+.faqItem[open] .faqA{
+  border-top: 1px solid rgba(11,19,32,.08);
+  padding-top: 14px;
+}
+
+.faqA p{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 820;
+
+  /* color respuesta */
+  color: rgba(43,44,131,.85);
+  max-width: 78ch;
+}
+
+/* animación sutil */
+@keyframes fadeInFaq{
+  from{ opacity:0; transform: translateY(-4px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* focus accesible */
+.faqSummary:focus-visible{
+  outline: 3px solid rgba(32,211,230,.35);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+/* mobile */
+@media (max-width: 520px){
+  .faqSummary{ padding: 18px 14px 14px; }
+  .faqQ{ font-size: 15px; }
+  .faqChevron{ width: 38px; height: 38px; }
+  .faqA{ padding: 0 14px 14px; }
+  .faqA p{ font-size: 14.5px; }
+}
+
+
+
 /* =========================================================
    FIN COMPONENTS.CSS
    ========================================================= */
