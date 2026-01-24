@@ -2,7 +2,10 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { SITE } from "@/config/site";
 import SeoJsonLd from "@/components/SeoJsonLd.astro";
-const wa = `https://wa.me/${SITE.whatsappE164}?text=${encodeURIComponent("Hola! Quiero coordinar una visita.")}`;
+
+const wa = `https://wa.me/${SITE.whatsappE164}?text=${encodeURIComponent(
+  "Hola! Quiero coordinar una visita."
+)}`;
 ---
 <BaseLayout
   title={`Contacto | ${SITE.name}`}
@@ -17,13 +20,13 @@ const wa = `https://wa.me/${SITE.whatsappE164}?text=${encodeURIComponent("Hola! 
       <p class="p">La forma más rápida es por WhatsApp. Sin registros, sin vueltas.</p>
 
       <div class="ctaRow" style="margin-top:18px;">
-  <a class="btn btn--wa btn--pro" href={wa}>
-    <span class="btn__badge">WhatsApp</span>
-    
-  </a>
-  <a class="btn btn--ghost btn--pro" href="/servicios">Ver servicios</a>
-</div>
+        <a class="btn btn--wa btn--pro" href={wa} aria-label="Abrir WhatsApp">
+          <i class="bi bi-whatsapp btnIcon"></i>
+          <span class="btn__badge">WhatsApp</span>
+        </a>
 
+        <a class="btn btn--ghost btn--pro" href="/servicios">Ver servicios</a>
+      </div>
 
       <div class="divider"></div>
 

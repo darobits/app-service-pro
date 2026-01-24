@@ -26,13 +26,18 @@ const wa =
 
         <div class="footerFacts">
           <div class="fact">
-            <div class="fact__icon" aria-hidden="true">📍</div>
+            <div class="fact__icon" aria-hidden="true">
+              <i class="bi bi-geo-alt-fill factIcon"></i>
+            </div>
             <div>
               <strong>Cobertura:</strong> {SITE.coverage}
             </div>
           </div>
+
           <div class="fact">
-            <div class="fact__icon" aria-hidden="true">🕒</div>
+            <div class="fact__icon" aria-hidden="true">
+              <i class="bi bi-clock-fill factIcon"></i>
+            </div>
             <div>
               <strong>Horarios:</strong> {SITE.hours}
             </div>
@@ -47,12 +52,12 @@ const wa =
 
         <div class="ctaRow" style="margin-top:12px">
           <a class="btn btn--wa" href={wa} aria-label="Reservar por WhatsApp">
-            <span class="btn__icon" aria-hidden="true">💬</span>
+            <i class="bi bi-whatsapp btnIcon"></i>
             WhatsApp
           </a>
 
           <a class="btn btn--ghost" href="/#servicios" aria-label="Ir al panel de servicios">
-            <span class="btn__icon" aria-hidden="true">🧰</span>
+            <i class="bi bi-tools btnIcon"></i>
             Reservar visita
           </a>
         </div>

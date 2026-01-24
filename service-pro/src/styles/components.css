@@ -13,6 +13,7 @@
    9) Services Grid / Card  ✅ (corrección: panel fuera, grid puro)
    10) Booking Form ✅ (form premium + layout + inputs)
    11) FAQ ✅ (accordion premium)
+   12) HERO ✅ (caja/panel premium)
 
    ========================================================= */
 
@@ -161,25 +162,27 @@
   justify-content:center;
   border: 1px solid rgba(6,43,21,.10);
   background: linear-gradient(90deg, var(--wa), var(--wa-dark));
-  color: #062b15;
   box-shadow: 0 18px 38px rgba(37,211,102,.22);
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
 
-/* ÍCONO WHATSAPP (Bootstrap Icons) */
+/* =========================================================
+   WhatsApp Icon (Bootstrap Icons) ✅
+   - Ícono visible y consistente
+   - Usado en header (botón redondo) y otros CTAs
+   ========================================================= */
+
 .waIcon{
-  font-size: 26px;          /* ⬅️ tamaño real del logo */
+  font-size: 26px;   /* ⬅️ logo más grande */
   line-height: 1;
-  color: #062b15;           /* mismo color que antes */
+  display:block;
+  color: #062b15;    /* ✅ en header: buen contraste sobre verde */
 }
 
 /* un poco más grande en desktop */
 @media (min-width: 920px){
-  .waIcon{
-    font-size: 26px;
-  }
+  .waIcon{ font-size: 28px; }
 }
-
 
 .waIconBtn:hover{
   transform: translateY(-1px);
@@ -189,31 +192,12 @@
 .waIconBtn:active{ transform: translateY(1px); }
 .btn__icon svg{ width:20px; height:20px; fill: currentColor; }
 
-/* =========================================================
-   WhatsApp Icon (Bootstrap Icons) ✅
-   - Ícono blanco y bien visible sobre el botón verde
-   - No depende del SVG custom
-   ========================================================= */
-
-.waIcon{
-  font-size: 22px;
-  line-height: 1;
-  display: block;
-  color: #fff; /* ✅ contraste alto */
-}
-
-/* opcional: si querés un poco más grande en desktop */
-@media (min-width: 920px){
-  .waIcon{ font-size: 23px; }
-}
-
-/* ícono inline para el botón del menú mobile */
+/* ícono inline para el botón del menú mobile (btn--wa: texto oscuro) */
 .waInlineIcon{
   font-size: 18px;
   line-height: 1;
-  color: #062b15; /* mantiene el look del btn--wa (texto oscuro) */
+  color: #062b15;
 }
-
 
 /* Menu button (mobile) */
 .menuBtn{
@@ -254,6 +238,7 @@
 }
 .menuIcon::before{ top: -6px; }
 .menuIcon::after{ top: 6px; }
+
 
 
 /* =========================================================
@@ -341,6 +326,67 @@
   font-size: 15px;
 }
 
+/* =========================================================
+   2.1) CTA ROW ✅ (layout responsive de botones)
+   ---------------------------------------------------------
+   Problema:
+   - En cards/paneles (Contacto, Footer) los botones quedaban
+     “pegados” o apilados sin aire.
+   Solución:
+   - gap real + wrap
+   - en mobile: full width y stack prolijo
+   - en desktop: fila
+   ========================================================= */
+
+.ctaRow{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 14px;                 /* ✅ aire consistente */
+  align-items: center;
+}
+
+/* Evita que se deformen y ayuda a wrapear */
+.ctaRow > .btn{
+  min-width: 180px;
+}
+
+/* Mobile: botones uno abajo del otro y full width */
+@media (max-width: 520px){
+  .ctaRow{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .ctaRow > .btn{
+    width: 100%;
+    justify-content: center;
+    min-width: 0;
+  }
+}
+
+/* Tablet+ : vuelven a fila */
+@media (min-width: 521px){
+  .ctaRow{
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/*BOTON DE pages/contacto wpp*/
+.btnIcon{
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* en desktop un toque más grande */
+@media (min-width: 920px){
+  .btnIcon{ font-size: 22px; }
+}
+
+
 
 /* =========================================================
    3) PANELS / ABOUT / CTA
@@ -423,6 +469,7 @@
 }
 
 
+
 /* =========================================================
    4) REVEAL (animación on-scroll)
    ========================================================= */
@@ -437,6 +484,7 @@
 @media (prefers-reduced-motion: reduce){
   [data-reveal]{ opacity:1; transform:none; transition:none; }
 }
+
 
 
 /* =========================================================
@@ -493,9 +541,9 @@
 
 /* pastilla */
 .brandLogo{
-  width: 300px;          /* ✅ más ancho */
-  height: 200px;          /* ✅ más alto */
-  padding: 10px 14px;    /* ✅ aire interno */
+  width: 300px;
+  height: 200px;
+  padding: 10px 14px;
 
   display:flex;
   align-items:center;
@@ -516,18 +564,15 @@
   filter: saturate(1.02);
 }
 
-/* logo: tamaño consistente por ALTURA (se ven parejos) */
+/* logo: tamaño consistente por ALTURA */
 .brandLogo img{
-  height: 120px;          /* ✅ subí/bajá este número y listo */
-  width: auto;           /* mantiene proporción */
-  max-width: 170px;      /* evita que uno enorme se coma la pastilla */
+  height: 120px;
+  width: auto;
+  max-width: 170px;
   object-fit: contain;
   display:block;
-
-  /* opcional: mejora visual */
   filter: saturate(1.05) contrast(1.02);
 }
-
 
 /* responsive */
 @media (max-width: 520px){
@@ -545,7 +590,7 @@
 
   .brandLogo img{
     height: 44px;
-     max-width: 120px;
+    max-width: 120px;
   }
 }
 
@@ -581,6 +626,7 @@
   margin-bottom: 10px;
 }
 .stepIcon svg{ width: 22px; height: 22px; fill: rgba(11,19,32,.92); }
+
 
 
 /* =========================================================
@@ -662,6 +708,7 @@
 }
 
 
+
 /* =========================================================
    8) FOOTER
    ========================================================= */
@@ -715,7 +762,6 @@
 }
 
 /* Brand */
-
 .footerBrand{
   display:flex;
   gap: 14px;
@@ -731,7 +777,6 @@
 }
 
 /* Facts */
-
 .footerFacts{
   margin-top: 12px;
   display:flex;
@@ -761,8 +806,14 @@
   fill: rgba(11,19,32,.92);
 }
 
-/* Links */
+/* Footer icons Bootstrap */
+.factIcon{
+  font-size: 16px;
+  line-height: 1;
+  color: rgba(11,19,32,.92);
+}
 
+/* Links */
 .footerLinks{
   list-style:none;
   padding:0;
@@ -785,18 +836,17 @@
 .footerCtas{
   display:flex;
   flex-direction: column;
-  gap: 22px;          /* ⬅️ antes 14px */
-  margin-top: 16px;   /* ⬅️ antes 12px */
+  gap: 22px;
+  margin-top: 16px;
 }
 
 @media(min-width: 900px){
   .footerCtas{
-    gap: 18px;        /* ⬅️ más aire en desktop */
+    gap: 18px;
   }
 }
 
 /* Bottom */
-
 .footer__bottom{
   margin-top: 16px;
   color: rgba(11,19,32,.62);
@@ -830,29 +880,25 @@
    - Cards modernas y compactas
    ========================================================= */
 
-/* Grilla pura (sin panel) */
 .serviceGrid{
   display:grid;
   gap: 14px;
   grid-template-columns: 1fr;
-  margin-top: 18px; /* separa título del grid */
+  margin-top: 18px;
 }
 
-/* 2 columnas en tablet */
 @media (min-width: 720px){
   .serviceGrid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* 3 columnas en desktop */
 @media (min-width: 1080px){
   .serviceGrid{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* Card */
 .serviceCard{
   display:flex;
   align-items:center;
@@ -914,7 +960,6 @@
   line-height: 1.15;
 }
 
-/* Subtítulo oculto (como venías usando) */
 .serviceCard__desc{ display:none !important; }
 
 .serviceCard__chev{
@@ -935,7 +980,6 @@
   flex: 0 0 auto;
 }
 
-/* Compacto en mobile */
 @media (max-width: 420px){
   .panel--services{ padding: 18px; }
   .serviceCard{ padding: 14px 14px; }
@@ -945,7 +989,6 @@
 
 /***********ESTILOS PARA EL FORMULARIO***********/
 
-/* Panel específico que envuelve el formulario (si usás el wrapper) */
 .panel--booking{
   padding: 22px;
 }
@@ -953,13 +996,11 @@
   .panel--booking{ padding: 26px; }
 }
 
-/* Contenedor del form (BookingForm.astro) */
 .form{
   max-width: 880px;
   margin: 0 auto;
 }
 
-/* Header del form */
 .formHeader{
   text-align: left;
   margin-bottom: 16px;
@@ -979,14 +1020,12 @@
   font-size: 15px;
 }
 
-/* Grid de campos */
 .form{
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
 }
 
-/* En desktop: 2 columnas, pero textarea y acciones ocupan todo */
 @media (min-width: 900px){
   .form{
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -997,14 +1036,12 @@
   .formActions{ grid-column: 1 / -1; }
 }
 
-/* Cada campo */
 .field{
   display:flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Labels */
 .field label{
   font-weight: 950;
   color: rgba(11,19,32,.86);
@@ -1012,7 +1049,6 @@
   font-size: 14px;
 }
 
-/* Inputs / Select / Textarea base */
 .field :is(input, select, textarea){
   width: 100%;
   border-radius: 16px;
@@ -1025,20 +1061,17 @@
   transition: box-shadow .18s ease, border-color .18s ease, transform .18s ease, background .18s ease;
 }
 
-/* Placeholders */
 .field :is(input, textarea)::placeholder{
   color: rgba(11,19,32,.45);
   font-weight: 750;
 }
 
-/* Textarea */
 .field textarea{
   min-height: 110px;
   resize: vertical;
   padding-top: 12px;
 }
 
-/* Select */
 .field select{
   appearance: none;
   background-image:
@@ -1054,7 +1087,6 @@
   padding-right: 42px;
 }
 
-/* Focus lindo */
 .field :is(input, select, textarea):focus{
   outline: none;
   border-color: rgba(32,211,230,.45);
@@ -1062,12 +1094,10 @@
   background: rgba(255,255,255,.98);
 }
 
-/* Micro-interacción */
 .field :is(input, select, textarea):hover{
   border-color: rgba(11,19,32,.18);
 }
 
-/* Acciones */
 .formActions{
   margin-top: 6px;
   display:flex;
@@ -1076,7 +1106,6 @@
   align-items: flex-start;
 }
 
-/* Botón WA dentro del form (anchor) */
 .btn--waForm{
   width: 100%;
   justify-content: center;
@@ -1086,7 +1115,6 @@
   font-weight: 980;
 }
 
-/* Help */
 .formHelp{
   margin: 0;
   color: rgba(11,19,32,.68);
@@ -1095,7 +1123,6 @@
   font-size: 14px;
 }
 
-/* Mobile fino */
 @media (max-width: 420px){
   .formSubtitle{ font-size: 14px; }
   .field :is(input, select, textarea){ border-radius: 14px; }
@@ -1103,11 +1130,9 @@
 }
 
 
+
 /* =========================================================
    11) FAQ ✅ (accordion premium + color dinámico)
-   - Pregunta cambia de color al abrir
-   - Respuesta con color diferenciado
-   - Transiciones suaves
    ========================================================= */
 
 .faqList{
@@ -1117,7 +1142,6 @@
   margin-top: 10px;
 }
 
-/* item */
 .faqItem{
   position: relative;
   border-radius: 18px;
@@ -1128,7 +1152,6 @@
   transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
 }
 
-/* barrita superior */
 .faqItem::before{
   content:"";
   position:absolute;
@@ -1146,7 +1169,6 @@
   border-color: rgba(32,211,230,.22);
 }
 
-/* summary */
 .faqSummary{
   list-style: none;
   cursor: pointer;
@@ -1160,7 +1182,6 @@
 
 .faqSummary::-webkit-details-marker{ display:none; }
 
-/* PREGUNTA */
 .faqQ{
   font-weight: 980;
   font-size: 16px;
@@ -1170,7 +1191,6 @@
   transition: color .18s ease;
 }
 
-/* CHEVRON */
 .faqChevron{
   width: 40px;
   height: 40px;
@@ -1187,7 +1207,6 @@
   transition: transform .18s ease, background .18s ease, color .18s ease;
 }
 
-/* ESTADO ABIERTO */
 .faqItem[open]{
   border-color: rgba(32,211,230,.35);
   background:
@@ -1199,19 +1218,16 @@
   opacity: .55;
 }
 
-/* 👉 pregunta activa con color */
 .faqItem[open] .faqQ{
   color: rgba(9, 20, 174, 0.95);
 }
 
-/* chevron activo */
 .faqItem[open] .faqChevron{
   transform: rotate(180deg);
   background: rgba(32,211,230,.18);
   color: rgba(11,19,32,.90);
 }
 
-/* RESPUESTA */
 .faqA{
   padding: 0 16px 16px;
   animation: fadeInFaq .18s ease;
@@ -1227,26 +1243,21 @@
   font-size: 15px;
   line-height: 1.7;
   font-weight: 820;
-
-  /* color respuesta */
   color: rgba(43,44,131,.85);
   max-width: 78ch;
 }
 
-/* animación sutil */
 @keyframes fadeInFaq{
   from{ opacity:0; transform: translateY(-4px); }
   to{ opacity:1; transform: translateY(0); }
 }
 
-/* focus accesible */
 .faqSummary:focus-visible{
   outline: 3px solid rgba(32,211,230,.35);
   outline-offset: 4px;
   border-radius: 16px;
 }
 
-/* mobile */
 @media (max-width: 520px){
   .faqSummary{ padding: 18px 14px 14px; }
   .faqQ{ font-size: 15px; }
@@ -1254,6 +1265,8 @@
   .faqA{ padding: 0 14px 14px; }
   .faqA p{ font-size: 14.5px; }
 }
+
+
 
 /* =========================================================
    12) HERO ✅ (caja/panel premium)
