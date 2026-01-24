@@ -6,61 +6,91 @@ const wa =
   `https://wa.me/${SITE.whatsappE164}?text=` +
   encodeURIComponent("Hola! Quiero reservar una visita. ¿Disponibilidad?");
 ---
-<section class="section">
+<section class="section heroSection">
   <div class="container">
-    <div class="heroShell">
-      <div class="hero">
-        <div class="hero__content">
-          <p class="hero__kicker">CABA / AMBA • Residencial y comercial</p>
+    <!-- ✅ Caja/panel del HERO (solo este bloque, TrustBar queda igual afuera) -->
+    <div class="heroPanel" data-reveal>
+      <div class="heroShell">
+        <div class="hero">
+          <div class="hero__content">
+            <p class="hero__kicker">CABA / AMBA • Residencial y comercial</p>
 
-          <h1 class="h1 hero__title">
-            Servicio técnico <span class="hero__accent">rápido</span> y claro.
-          </h1>
+            <h1 class="h1 hero__title">
+              Servicio técnico <span class="hero__accent">rápido</span> y claro.
+            </h1>
 
-          <p class="p">
-            Lavarropas, heladeras, aires piso-techo, hornos eléctricos y cámaras frigoríficas.
-            Coordiná en 1 minuto por WhatsApp.
-          </p>
+            <p class="p">
+              Lavarropas, heladeras, aires piso-techo, hornos eléctricos y cámaras frigoríficas.
+              Coordiná en 1 minuto por WhatsApp.
+            </p>
 
-          <div class="hero__actions">
-  <a class="btn btn--wa hero__waDesktop" href={wa}>Reservar por WhatsApp</a>
-  <a class="btn btn--ghost" href="/#servicios">Ver servicios</a>
-</div>
+            <div class="hero__actions">
+              <a class="btn btn--wa hero__waDesktop" href={wa}>Reservar por WhatsApp</a>
+              <a class="btn btn--ghost" href="/#servicios">Ver servicios</a>
+            </div>
 
-<style>
-  /* ...dejá el resto de estilos que ya tenías... */
+            <style>
 
-  /* En mobile: ocultamos el WA del hero para no duplicar */
-  .hero__waDesktop{ display:none; }
-  @media (min-width: 920px){
-    .hero__waDesktop{ display:inline-flex; }
-  }
-</style>
+              /* En mobile: ocultamos el WA del hero para no duplicar */
+              .hero__waDesktop{ display:none; }
+              @media (min-width: 920px){
+                .hero__waDesktop{ display:inline-flex; }
+              }
+            </style>
 
-
-          <div class="hero__meta">
-            <span>✅ Sin registrarte</span>
-            <span>✅ Mensaje ordenado</span>
-            <span>✅ Coordinación rápida</span>
+            <div class="hero__meta">
+              <span>✅ {SITE.coverage}</span>
+              <span>✅ Mensaje ordenado</span>
+              <span>✅ Coordinación rápida</span>
+            </div>
           </div>
-        </div>
 
-        <div class="hero__media" aria-hidden="true">
-          <img
-            src={heroImg.src}
-            width={heroImg.width}
-            height={heroImg.height}
-            alt="Service Pro - Servicio técnico"
-            loading="eager"
-            decoding="async"
-          />
-          <div class="hero__glow"></div>
+          <div class="hero__media" aria-hidden="true">
+            <img
+              src={heroImg.src}
+              width={heroImg.width}
+              height={heroImg.height}
+              alt="Service Pro - Servicio técnico"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="hero__glow"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <style>
+    /* =========================================================
+       HERO ✅ Caja / Panel premium (solo el bloque del hero)
+       ========================================================= */
+
+    .heroSection{
+      padding-top: 34px; /* aire debajo del header */
+    }
+
+    .heroPanel{
+      border-radius: calc(var(--radius) + 18px);
+      border: 1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(900px 520px at 14% -12%, rgba(32,211,230,.16), transparent 62%),
+        radial-gradient(900px 520px at 92% -12%, rgba(255,75,75,.10), transparent 62%),
+        rgba(208, 217, 224, 0.88);
+
+      box-shadow: 0 26px 80px rgba(10,20,40,.14);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    @media (min-width: 920px){
+      .heroPanel{ padding: 28px; }
+    }
+
+    /* =========================================================
+       HERO Layout (tu código original)
+       ========================================================= */
+
     .hero{
       display:grid;
       gap: 18px;
@@ -81,8 +111,8 @@ const wa =
     }
     .hero__title{ margin-bottom: 10px; }
     .hero__accent{
-      color: var(--accent);
-      text-shadow: 0 0 22px rgba(32,211,230,.20);
+      color: rgba(28, 73, 158, 0.981);;
+      text-shadow: 0 0 22px rgba(57, 58, 62, 0.2);
     }
     .hero__actions{
       margin-top: 18px;

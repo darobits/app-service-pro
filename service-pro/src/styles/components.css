@@ -165,6 +165,22 @@
   box-shadow: 0 18px 38px rgba(37,211,102,.22);
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
+
+/* ÍCONO WHATSAPP (Bootstrap Icons) */
+.waIcon{
+  font-size: 26px;          /* ⬅️ tamaño real del logo */
+  line-height: 1;
+  color: #062b15;           /* mismo color que antes */
+}
+
+/* un poco más grande en desktop */
+@media (min-width: 920px){
+  .waIcon{
+    font-size: 26px;
+  }
+}
+
+
 .waIconBtn:hover{
   transform: translateY(-1px);
   box-shadow: 0 22px 44px rgba(37,211,102,.28);
@@ -172,6 +188,32 @@
 }
 .waIconBtn:active{ transform: translateY(1px); }
 .btn__icon svg{ width:20px; height:20px; fill: currentColor; }
+
+/* =========================================================
+   WhatsApp Icon (Bootstrap Icons) ✅
+   - Ícono blanco y bien visible sobre el botón verde
+   - No depende del SVG custom
+   ========================================================= */
+
+.waIcon{
+  font-size: 22px;
+  line-height: 1;
+  display: block;
+  color: #fff; /* ✅ contraste alto */
+}
+
+/* opcional: si querés un poco más grande en desktop */
+@media (min-width: 920px){
+  .waIcon{ font-size: 23px; }
+}
+
+/* ícono inline para el botón del menú mobile */
+.waInlineIcon{
+  font-size: 18px;
+  line-height: 1;
+  color: #062b15; /* mantiene el look del btn--wa (texto oscuro) */
+}
+
 
 /* Menu button (mobile) */
 .menuBtn{
@@ -1213,6 +1255,32 @@
   .faqA p{ font-size: 14.5px; }
 }
 
+/* =========================================================
+   12) HERO ✅ (caja/panel premium)
+   - Encierra título + imagen + CTAs + checks
+   - No afecta TrustBar
+   ========================================================= */
+
+.heroSection{
+  padding-top: 34px;
+}
+
+.heroPanel{
+  border-radius: calc(var(--radius) + 18px);
+  border: 1px solid rgba(255,255,255,.16);
+  background:
+    radial-gradient(900px 520px at 14% -12%, rgba(32,211,230,.16), transparent 62%),
+    radial-gradient(900px 520px at 92% -12%, rgba(255,75,75,.10), transparent 62%),
+    rgba(255,255,255,.88);
+
+  box-shadow: 0 26px 80px rgba(10,20,40,.14);
+  padding: 22px;
+  overflow: hidden;
+}
+
+@media (min-width: 920px){
+  .heroPanel{ padding: 28px; }
+}
 
 
 /* =========================================================
