@@ -5,6 +5,7 @@ import { ZONES } from "@/data/zones";
 import SeoJsonLd from "@/components/SeoJsonLd.astro";
 import mapaAMBA from "@/assets/images/mapa-amba.jpg";
 ---
+
 <BaseLayout
   title={`Zonas de atención | ${SITE.name}`}
   description={`Zonas de atención de ${SITE.name} en CABA y AMBA.`}
@@ -19,7 +20,8 @@ import mapaAMBA from "@/assets/images/mapa-amba.jpg";
         Atendemos <strong>{SITE.coverage}</strong>. Indicá tu barrio/partido al reservar.
       </p>
 
-      <div class="mapWrap" style="margin-top:18px;">
+      {/* MAPA */}
+      <div class="zonesMapWrap" style="margin-top:18px;">
         <img
           src={mapaAMBA.src}
           width={mapaAMBA.width}
@@ -28,71 +30,45 @@ import mapaAMBA from "@/assets/images/mapa-amba.jpg";
           loading="lazy"
           decoding="async"
         />
-        <div class="mapWrap__overlay"></div>
+        <div class="zonesMapOverlay"></div>
       </div>
 
       <div class="divider"></div>
 
-      <h2 class="h2">CABA</h2>
-      <ul class="list">
-        {ZONES.caba.map((z) => <li>{z}</li>)}
-      </ul>
+      {/* ZONAS (vertical + centrado) */}
+      <div class="zonesCards">
+        <section class="zoneCard zoneCard--caba" aria-label="Zonas CABA">
+          <div class="zoneCard__head">
+            <h2 class="zoneCard__title">CABA</h2>
+            <span class="zoneCard__badge">{ZONES.caba.length} zonas</span>
+          </div>
 
-      <div class="divider"></div>
+          <div class="zoneChips">
+            {ZONES.caba.map((z) => (
+              <span class="zoneChip">{z}</span>
+            ))}
+          </div>
+        </section>
 
-      <h2 class="h2">AMBA</h2>
-      <ul class="list">
-        {ZONES.amba.map((z) => <li>{z}</li>)}
-      </ul>
+        <section class="zoneCard zoneCard--amba" aria-label="Zonas AMBA">
+          <div class="zoneCard__head">
+            <h2 class="zoneCard__title">AMBA</h2>
+            <span class="zoneCard__badge">{ZONES.amba.length} zonas</span>
+          </div>
+
+          <div class="zoneChips">
+            {ZONES.amba.map((z) => (
+              <span class="zoneChip">{z}</span>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <p class="zonesNote">
+        ¿No ves tu zona? Igual escribinos: solemos cubrir cercanías según disponibilidad.
+      </p>
     </div>
   </section>
-
-  <style>
-    .mapWrap{
-      position: relative;
-      border-radius: calc(var(--radius) + 12px);
-      overflow: hidden;
-      border: 1px solid rgba(11,19,32,.10);
-      background: rgba(255,255,255,.75);
-      box-shadow: var(--shadow-soft);
-      height: clamp(240px, 34vw, 420px);
-      padding: 10px; /* importante para que contain no quede pegado */
-    }
-
-    /* Desktop: ver completa */
-    @media (min-width: 920px){
-      .mapWrap img{
-        object-fit: contain;
-        background: rgba(255,255,255,.75);
-      }
-    }
-
-    /* Mobile: llenar */
-    @media (max-width: 919px){
-      .mapWrap{
-        padding: 0;
-      }
-      .mapWrap img{
-        object-fit: cover;
-        object-position: center;
-      }
-    }
-
-    .mapWrap img{
-      width: 100%;
-      height: 100%;
-      display:block;
-      border-radius: calc(var(--radius) + 6px);
-      filter: saturate(1.03) contrast(1.03);
-    }
-
-    .mapWrap__overlay{
-      position:absolute;
-      inset: 0;
-      background:
-        radial-gradient(520px 220px at 20% 10%, rgba(32,211,230,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.00), rgba(11,19,32,.06));
-      pointer-events:none;
-    }
-  </style>
 </BaseLayout>
+
+

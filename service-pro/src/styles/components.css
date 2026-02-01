@@ -14,6 +14,7 @@
    10) Booking Form ✅ (form premium + layout + inputs)
    11) FAQ ✅ (accordion premium)
    12) HERO ✅ (caja/panel premium)
+   13) ZONAS ✅ (mapa + cards/chips)
 
    ========================================================= */
 
@@ -1293,6 +1294,205 @@
 
 @media (min-width: 920px){
   .heroPanel{ padding: 28px; }
+}
+
+
+
+/* =========================================================
+   13) ZONAS ✅ (mapa + cards/chips)
+   ---------------------------------------------------------
+   Nota:
+   - Estilos unificados en COMPONENTS.
+   - zonas.astro NO debe tener <style> para evitar conflictos.
+   ========================================================= */
+
+/* --- mapa --- */
+.zonesMapWrap{
+  position: relative;
+  border-radius: calc(var(--radius) + 12px);
+  overflow: hidden;
+  border: 1px solid rgba(11,19,32,.10);
+  background: rgba(255,255,255,.75);
+  box-shadow: var(--shadow-soft);
+  height: auto;
+
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 10px;
+}
+
+.zonesMapWrap img{
+  width: 100%;
+  height: auto;
+  display:block;
+  border-radius: calc(var(--radius) + 6px);
+  filter: saturate(1.03) contrast(1.03);
+  background: rgba(255,255,255,.75);
+}
+
+.zonesMapOverlay{
+  position:absolute;
+  inset: 10px;
+  border-radius: calc(var(--radius) + 6px);
+  background:
+    radial-gradient(520px 220px at 20% 10%, rgba(32,211,230,.10), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.00), rgba(11,19,32,.06));
+  pointer-events:none;
+}
+
+@media (max-width: 919px){
+  .zonesMapWrap{ padding: 0; }
+  .zonesMapWrap img{ border-radius: calc(var(--radius) + 12px); }
+  .zonesMapOverlay{ inset: 0; border-radius: calc(var(--radius) + 12px); }
+}
+
+/* --- listado premium (cards + chips) ✅ VERTICAL + CENTRADO --- */
+.zonesCards{
+  display:grid;
+  grid-template-columns: 1fr;   /* ✅ SIEMPRE una columna */
+  gap: 18px;
+  margin-top: 18px;
+
+  /* ✅ centra las cards */
+  justify-items: center;
+}
+
+/* ✅ Reaseguro anti-conflictos:
+   Si existiera un CSS viejo que ponga 2 columnas, esto lo pisa. */
+@media (min-width: 900px){
+  .zonesCards{ grid-template-columns: 1fr !important; }
+}
+
+.zoneCard{
+  width: 100%;
+  max-width: 980px; /* ✅ mismo ancho que el mapa */
+
+  display:flex;
+  flex-direction: column;
+
+  border-radius: calc(var(--radius) + 14px);
+  border: 1px solid rgba(11,19,32,.10);
+  background:
+    radial-gradient(900px 520px at 18% -10%, rgba(32,211,230,.12), transparent 62%),
+    rgba(255,255,255,.92);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  overflow:hidden;
+}
+
+/* CABA (azul brand) */
+.zoneCard--caba{
+  border-color: rgba(43,44,131,.22);
+  box-shadow:
+    0 22px 60px rgba(43,44,131,.12),
+    inset 0 0 0 1px rgba(43,44,131,.10);
+
+  background:
+    radial-gradient(520px 240px at 12% 0%, rgba(43,44,131,.16), transparent 60%),
+    rgba(255,255,255,.92);
+}
+
+/* AMBA (cyan acento) */
+.zoneCard--amba{
+  border-color: rgba(32,211,230,.28);
+  box-shadow:
+    0 22px 60px rgba(32,211,230,.14),
+    inset 0 0 0 1px rgba(32,211,230,.12);
+
+  background:
+    radial-gradient(520px 240px at 12% 0%, rgba(32,211,230,.16), transparent 60%),
+    rgba(255,255,255,.92);
+}
+
+.zoneCard__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(11,19,32,.08);
+}
+
+.zoneCard__title{
+  margin: 0;
+  font-weight: 980;
+  letter-spacing: -0.02em;
+  color: rgba(11,19,32,.92);
+  font-size: 18px;
+}
+
+.zoneCard__badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-weight: 950;
+  font-size: 12.5px;
+  color: rgba(11,19,32,.72);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(11,19,32,.10);
+  box-shadow: 0 10px 22px rgba(10,20,40,.06);
+  white-space: nowrap;
+}
+
+.zoneChips{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.zoneChip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 13px;
+  color: rgba(11,19,32,.82);
+  background: rgba(255,255,255,.86);
+  border: 1px solid rgba(11,19,32,.10);
+  box-shadow: 0 12px 26px rgba(10,20,40,.06);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, filter .16s ease;
+  user-select: none;
+}
+
+/* Hover por zona */
+.zoneCard--caba .zoneChip:hover{
+  transform: translateY(-1px);
+  border-color: rgba(43,44,131,.45);
+  box-shadow: 0 18px 40px rgba(43,44,131,.18);
+  filter: saturate(1.02);
+}
+
+.zoneCard--amba .zoneChip:hover{
+  transform: translateY(-1px);
+  border-color: rgba(32,211,230,.55);
+  box-shadow: 0 18px 40px rgba(32,211,230,.20);
+  filter: saturate(1.02);
+}
+
+.zoneChip:active{
+  transform: translateY(0px);
+}
+
+.zonesNote{
+  margin-top: 14px;
+  color: rgba(11,19,32,.70);
+  font-weight: 850;
+  line-height: 1.6;
+  font-size: 14px;
+  max-width: 80ch;
+}
+
+@media (max-width: 520px){
+  .zoneCard{ padding: 16px; }
+  .zoneChip{ padding: 9px 11px; font-size: 12.8px; }
+  .zoneCard__title{ font-size: 17px; }
 }
 
 
